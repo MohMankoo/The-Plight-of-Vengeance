@@ -1,0 +1,16 @@
+# Credits for .gitignore: https://www.reddit.com/r/Unity3D/comments/6n4gp4/definitive_gitignore_of_unity_projects/
+# Ignore everything.  We'll whitelist what we want to pull in.
+/*
+/*/
+
+# Git meta files
+!.gitignore
+!.gitattributes
+!README.md
+
+# Whitelisted directories/files
+!/ProjectSettings/
+!/Assets/
+
+# Any modules kept in their own git repo.
+Assets/_modules/fps/
