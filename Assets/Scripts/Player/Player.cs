@@ -9,6 +9,7 @@ public class Player : Entity {
     public PlayerHealth playerHealthDisplay;  // Game HUD
 
     public PlayerGun gun;
+    public CameraShake cameraShake;
 
     // Player stats
     public int maxHealth = 100;
@@ -129,6 +130,8 @@ public class Player : Entity {
     }
 
     IEnumerator Dash(Vector2 direction) {
+        cameraShake.TriggerShaking(0.2f, 0.1f);  // Shake camera for effect
+
         float dashLength = 0.8f;
         while (dashLength > 0) {
             playerRB.MovePosition(playerRB.position + (direction * dashIntensity));

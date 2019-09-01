@@ -8272,10 +8272,11 @@ MonoBehaviour:
   turnSpeed: 10
   playerHealthDisplay: {fileID: 534652598}
   gun: {fileID: 1511479928}
+  cameraShake: {fileID: 656403460}
   maxHealth: 100
   revengeScore: 0
   projectileAttkPwrBonus: 1
-  canDash: 1
+  canDash: 0
   dashCooldown: 1
   dashIntensity: 2.5
 --- !u!50 &2084425878
