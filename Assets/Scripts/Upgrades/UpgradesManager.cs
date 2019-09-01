@@ -10,7 +10,7 @@ public class UpgradesManager : MonoBehaviour {
     private Player player;
     public Text revengeScoreLabel;
 
-    // TODO: link upgrade sprites that can be updates
+    // References to Upgrade images
     public Image healthSprite;
     public Image speedSprite;
     public Image attackPwrSprite;
@@ -24,6 +24,7 @@ public class UpgradesManager : MonoBehaviour {
 
     // Misc
     private EntityPopupCreator revengeCostGraphics;
+    public MouseCursor mouseCursorHandler;
 
     // Start is called before the first frame update
     void Start() {
@@ -226,7 +227,9 @@ public class UpgradesManager : MonoBehaviour {
             player.revengeScore -= 1000;
             gunUpgradeLevel++;
 
+            // Change gun sprite and cursor
             gunSprite.sprite = Resources.Load<Sprite>("Upgrades/X-GunUpgrade");
+            mouseCursorHandler.ChangeGameCursorType("X-Gun");
             return true;
 
         } else if (level == 2 && player.revengeScore >= 3000) {  // V-Gun
@@ -235,7 +238,9 @@ public class UpgradesManager : MonoBehaviour {
             player.revengeScore -= 3000;
             gunUpgradeLevel++;
 
+            // Change gun sprite and cursor
             gunSprite.sprite = Resources.Load<Sprite>("Upgrades/V-GunUpgrade");
+            mouseCursorHandler.ChangeGameCursorType("V-Gun");
             return true;
         }
 

@@ -3727,8 +3727,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 857072540}
-  - component: {fileID: 857072539}
   - component: {fileID: 857072541}
+  - component: {fileID: 857072539}
+  - component: {fileID: 857072542}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3750,6 +3751,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealthDisplay: {fileID: 534652598}
   spawner: {fileID: 961019825}
+  mouseCursorHandler: {fileID: 857072542}
   gameHUD: {fileID: 2009834505}
   revivedDisplay: {fileID: 6013616639680512023, guid: a5bde79bc17cc3d4db2782cf0c1b05dc,
     type: 3}
@@ -3782,6 +3784,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e8308eadea6a214398a3c73f8801480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &857072542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 857072538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27c2fbbebf2839e42bef3352df2913e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zykaCursor: {fileID: 4900000, guid: c55f7213cca630c4491ec72639a23d86, type: 3}
+  XGunCursor: {fileID: 4900000, guid: bd91d51a15800fe4bbd3c115ec3b578c, type: 3}
+  VGunCursor: {fileID: 4900000, guid: e1fa87d043a229846919cd2eae5cdd25, type: 3}
 --- !u!1 &862119177
 GameObject:
   m_ObjectHideFlags: 0
@@ -7038,6 +7055,7 @@ MonoBehaviour:
   speedSprite: {fileID: 83531106}
   attackPwrSprite: {fileID: 1379897381}
   gunSprite: {fileID: 1548929937}
+  mouseCursorHandler: {fileID: 857072542}
 --- !u!114 &1752298932
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,9 +5,13 @@ using UnityEngine;
 // Controls entering the game from the upgrades screen and vice versa
 public class UpgradesGateway : MonoBehaviour {
     
+    // Player and Enemies
     private Player player;
     public PlayerHealth playerHealthDisplay;
     public GameObject spawner;
+
+    // Cursor 
+    public MouseCursor mouseCursorHandler;
 
     // For showing "Revived message" upon player death
     public Canvas gameHUD;
@@ -56,6 +60,9 @@ public class UpgradesGateway : MonoBehaviour {
         playerHealthDisplay.ResetDisplayColours();
         playerHealthDisplay.SetVisible(true);
 
+        // Change mouse cursor
+        mouseCursorHandler.EnableGameCursor();
+
         // When entering game, reset currentEnemies list
         gameOver = false;
         Enemy.currentEnemies.Clear();
@@ -82,6 +89,9 @@ public class UpgradesGateway : MonoBehaviour {
         // Set animator information
         upgradesCanvasAninmator.enabled = true;
         StartCoroutine(TriggerUpgradesTransition(true));
+
+        // Change mouse cursor
+        mouseCursorHandler.EnableMenuCursor();
     }
 
     // Transition from or to the upgrades screen
