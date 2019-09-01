@@ -2915,7 +2915,6 @@ GameObject:
   - component: {fileID: 656403458}
   - component: {fileID: 656403457}
   - component: {fileID: 656403460}
-  - component: {fileID: 656403461}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3001,19 +3000,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 656403458}
---- !u!114 &656403461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 656403456}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e5cadee3fa444044b8cb78696acf7df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: {x: 0, y: 0, z: 5}
 --- !u!1 &694118394
 GameObject:
   m_ObjectHideFlags: 0
@@ -5957,6 +5943,7 @@ MonoBehaviour:
   fixedCooldownTillNextShot: 0.5
   cooldownTillNextShot: 0
   bullet: {fileID: 3126701638618962542, guid: 17cfb65be22815d408f7172f845ed9be, type: 3}
+  cameraShake: {fileID: 656403460}
 --- !u!95 &1511479929
 Animator:
   serializedVersion: 3

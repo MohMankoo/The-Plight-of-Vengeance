@@ -6,6 +6,8 @@ public class PlayerGun : Gun {
     private GameObject player;
     public GameObject bullet;  // Bullet the gun uses
 
+    public CameraShake cameraShake;
+
     // Start is called before the first frame update
     void Start() {
         // Initialize variables
@@ -27,7 +29,7 @@ public class PlayerGun : Gun {
             {
                 Shoot(player, bullet);
                 gunAnimator.SetTrigger("gunFired");
-                // Call camera shake
+                cameraShake.TriggerShaking(0.08f, 0.08f);
 
                 cooldownTillNextShot = fixedCooldownTillNextShot;  // Reset cooldown
             }
