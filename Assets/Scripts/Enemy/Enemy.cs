@@ -22,7 +22,6 @@ public class Enemy : Entity {
 
     // Repelling attributes
     public float repelAmount = 2f;
-    public readonly float MIN_DISTANCE_FROM_OTHERS = 2f;
     
     public void InitializeEnemy(Enemy enemy, int health, int revengeScoreReward, float speed, float turnSpeed) {
         // Update reference information
@@ -117,7 +116,7 @@ public class Enemy : Entity {
             Vector2 selfPosition = gameObject.GetComponent<Rigidbody2D>().position;
             Vector2 otherPosition = other.gameObject.GetComponent<Rigidbody2D>().position;
 
-            if (Vector2.Distance(selfPosition, otherPosition) <= MIN_DISTANCE_FROM_OTHERS) {
+            if (Vector2.Distance(selfPosition, otherPosition) <= GameManager.minDistanceBetweenEnemies) {
                 Vector2 repelForce = (selfPosition - otherPosition).normalized * repelAmount * Time.deltaTime;
 
                 // Quick hack of making it non-kinematic to give it mass and add force

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 // Controls which upgrade tier to display on the upgrades screen
-public class UpgradesWindowManager : MonoBehaviour {
+public class UpgradesSwitcher : MonoBehaviour {
 
     // Information-displaying panels
     public GameObject upgradeInfoPanel;
@@ -38,12 +38,12 @@ public class UpgradesWindowManager : MonoBehaviour {
     // Used upon player revival when the Upgrades screen is re-entered
     public void ToggleUpgradeButton(GameObject upgradeButton) {
         upgradeButton.GetComponent<Toggle>().isOn = true;
-        UpdateSelectedUpgrade(upgradeButton);
+        SwitchToUpgradeGivenBy(upgradeButton);
     }
 
     // Fired every time an upgrade toggle is clicked on the left scrollview for any button toggled/de-toggled
     // Enabled button background (and associated upgrade info on right) if toggled and disables if de-toggled
-    public void UpdateSelectedUpgrade(GameObject upgradeButton) {
+    public void SwitchToUpgradeGivenBy(GameObject upgradeButton) {
         // Check whether the given button was toggled or de-toggled
         Toggle upgradeButtonToggle = upgradeButton.GetComponent<Toggle>();
 

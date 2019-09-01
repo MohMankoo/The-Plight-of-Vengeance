@@ -4,14 +4,10 @@ using UnityEngine;
 
 // Controls entering the game from the upgrades screen and vice versa
 public class UpgradesGateway : MonoBehaviour {
-
+    
     private Player player;
     public PlayerHealth playerHealthDisplay;
     public GameObject spawner;
-
-    // Player defaults
-    public Vector3 DEFAULT_PLAYER_POS = new Vector3(0, -6.5f, 0);
-    public Quaternion DEFAULT_PLAYER_ROTATION = Quaternion.identity;
 
     // For showing "Revived message" upon player death
     public Canvas gameHUD;
@@ -21,7 +17,7 @@ public class UpgradesGateway : MonoBehaviour {
     public Canvas upgradesCanvas;
     private Animator upgradesCanvasAninmator;
 
-    public UpgradesWindowManager upgradesWindowManager;
+    public UpgradesSwitcher upgradesSwitcher;
     public GameObject upgradeButtonSelectedOnRevival;
 
     private bool gameOver;
@@ -51,10 +47,8 @@ public class UpgradesGateway : MonoBehaviour {
 
     public void ExitUpgrades() {
         player.ReplenishFullHealth();
-        player.transform.position = DEFAULT_PLAYER_POS;
-        player.transform.rotation = DEFAULT_PLAYER_ROTATION;
-
-        Debug.Log(player.transform.position + " and " + DEFAULT_PLAYER_POS);
+        player.transform.position = GameManager.defaultPlayerPos;
+        player.transform.rotation = GameManager.defaultPlayerRotation;
 
         player.StopMovement(false);
         player.gun.Jarr(false);
@@ -105,7 +99,7 @@ public class UpgradesGateway : MonoBehaviour {
         upgradesCanvas.gameObject.SetActive(enteringUpgrades);
 
         // Select health upgrade button/toggle by default on enter/exit
-        upgradesWindowManager.ToggleUpgradeButton(upgradeButtonSelectedOnRevival);
+        upgradesSwitcher.ToggleUpgradeButton(upgradeButtonSelectedOnRevival);
 
         // Trigger animation for entering Upgrades AFTER Upgrades panel has been re-activated
         // to prevent buggy behaviour

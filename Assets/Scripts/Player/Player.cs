@@ -61,8 +61,8 @@ public class Player : Entity {
     // Set movement boundaries
     private void LateUpdate() {
         Vector2 restrictedPosition = playerRB.position;
-        restrictedPosition.x = Mathf.Clamp(playerRB.position.x, -12.06596f, 11.81223f);
-        restrictedPosition.y = Mathf.Clamp(playerRB.position.y, -7.054649f, 7.02379f);
+        restrictedPosition.x = Mathf.Clamp(playerRB.position.x, GameManager.MIN_X_BOUNDARY, GameManager.MAX_X_BOUNDARY);
+        restrictedPosition.y = Mathf.Clamp(playerRB.position.y, GameManager.MIN_Y_BOUNDARY, GameManager.MAX_Y_BOUNDARY);
         playerRB.position = restrictedPosition;
     }
 

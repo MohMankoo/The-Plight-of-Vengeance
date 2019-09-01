@@ -5,8 +5,6 @@ using UnityEngine;
 public class CameraShake : MonoBehaviour {
 
     public Camera mainCamera;
-
-    private Vector3 DEFAULT_CAMERA_POS = new Vector3(0, 0, -5);
     private float shakeIntenisty = 1;
 
     // Shake screen repeatedly (every 0.01s) for length
@@ -33,7 +31,7 @@ public class CameraShake : MonoBehaviour {
 
     private void StopShaking() {
         CancelInvoke("Shake");
-        mainCamera.transform.localPosition = DEFAULT_CAMERA_POS;
+        mainCamera.transform.localPosition = GameManager.defaultCameraPos;
     }
 
 }
