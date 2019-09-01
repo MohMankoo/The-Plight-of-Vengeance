@@ -30,7 +30,7 @@ public class Spawner : MonoBehaviour {
         }
 
         // Set to non-valid wave # so that update can increment it to a valid wave once spawner is activated
-        waveNumber = 5;
+        waveNumber = 0;
     }
 
     private void Update() {

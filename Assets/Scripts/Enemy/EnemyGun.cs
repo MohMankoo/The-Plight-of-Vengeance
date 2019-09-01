@@ -19,6 +19,27 @@ public class EnemyGun : Gun {
         cooldownTillNextShot = fixedCooldownTillNextShot;
     }
 
+    // Update is called once per frame
+    void Update() {
+        if (jarred)
+            return;
+
+        // Only decide to shoot if the enemy wielder is defined and player is alive
+        if (enemyUserSet && !playerTarget.IsDead()) {
+            // Shoot the gun only if cooldown has finished
+            if (cooldownTillNextShot <= 0) {
+                Shoot(enemyUser, bullet);
+                enemyGunAnimator.SetTrigger("gunFired");
+
+                cooldownTillNextShot = fixedCooldownTillNextShot;  // Reset cooldown
+
+            } else {
+                cooldownTillNextShot -= Time.deltaTime;
+            }
+
+        }
+    }
+
     public void UpdateEnemyGun(GameObject enemyUser) {
         this.enemyUser = enemyUser;
         string tag = enemyUser.tag;
@@ -57,28 +78,6 @@ public class EnemyGun : Gun {
         // Make changes take effect
         cooldownTillNextShot = fixedCooldownTillNextShot;
         enemyUserSet = true;
-    }
-
-    // Update is called once per frame
-    void Update() {
-        if (jarred)
-            return;
-
-        // Only decide to shoot if the enemy wielder is defined and player is alive
-        if (enemyUserSet && !playerTarget.IsDead()) 
-        {
-            // Shoot the gun only if cooldown has finished
-            if (cooldownTillNextShot <= 0) {
-                Shoot(enemyUser, bullet);
-                enemyGunAnimator.SetTrigger("gunFired");
-
-                cooldownTillNextShot = fixedCooldownTillNextShot;  // Reset cooldown
-
-            } else {
-                cooldownTillNextShot -= Time.deltaTime;
-            }
-
-        }
     }
 
 }
