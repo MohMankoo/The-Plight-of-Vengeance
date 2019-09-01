@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Controls Player upgrades: purchase, buying feedback, updates to upgrades screen.
 public class UpgradesManager : MonoBehaviour {
 
     // Player information
@@ -161,8 +162,7 @@ public class UpgradesManager : MonoBehaviour {
             return true;
 
         } else if (level == 2 && player.revengeScore >= 1750) {
-
-            //TODO DASH
+            player.SetCanDash(true);
 
             player.revengeScore -= 1750;
             speedUpgradeLevel++;

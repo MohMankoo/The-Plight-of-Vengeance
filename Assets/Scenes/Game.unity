@@ -7245,6 +7245,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealthDisplay: {fileID: 534652598}
   spawner: {fileID: 961019825}
+  DEFAULT_PLAYER_POS: {x: 0, y: -6.5, z: 0}
+  DEFAULT_PLAYER_ROTATION: {x: 0, y: 0, z: 0, w: 0}
   gameHUD: {fileID: 2009834505}
   revivedDisplay: {fileID: 6013616639680512023, guid: a5bde79bc17cc3d4db2782cf0c1b05dc,
     type: 3}
@@ -8232,6 +8234,9 @@ MonoBehaviour:
   maxHealth: 100
   revengeScore: 0
   projectileAttkPwrBonus: 1
+  canDash: 1
+  dashCooldown: 1
+  dashIntensity: 2.5
 --- !u!50 &2084425878
 Rigidbody2D:
   serializedVersion: 4
@@ -8245,9 +8250,9 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1

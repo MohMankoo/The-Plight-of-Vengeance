@@ -4,7 +4,7 @@ using System.Collections;
 public class Player : Entity {
     
     // Unity components
-    private Rigidbody2D player;
+    private Rigidbody2D playerRB;
     private Animator playerAnimator;
     public PlayerHealth playerHealthDisplay;  // Game HUD
 
@@ -15,11 +15,21 @@ public class Player : Entity {
     public int revengeScore = 0;
     public int projectileAttkPwrBonus = 1;
 
+    // Dashing
+    public bool canDash;
+    private bool justDashed;
+    public float dashCooldown = 3f;
+    public float dashIntensity = 500;
+
     private void Start() {
         // Initialize properties
-        player = GetComponent<Rigidbody2D>();
+        playerRB = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
         entityPopup = GetComponent<EntityPopupCreator>();
+
+        // Dashing
+        canDash = false;
+        justDashed = false;
 
         // Health
         health = maxHealth;
@@ -27,27 +37,37 @@ public class Player : Entity {
         playerHealthDisplay.UpdateMaxHealth(maxHealth);
         playerAnimator.SetFloat("PlayerHealth", health);
 
-        // Update speed from Entity.cs
+        // Update speed attribute inherited from Entity.cs
         speed = 4f;
 
         // Set the default gun as Zyka
         gun.UpdateGun("Zyka", projectileAttkPwrBonus);
     }
 
-    // Update is called once per frame
-    void Update() {
-        if (movementStopped)
-            return;
+    // Frame updates
 
-        KillIfHealthDepleted();
+    // Even though movement is not physics-related, put it in FixedUpdate()
+    private void FixedUpdate() {
+        if (movementStopped) return;
         MovePlayer();
-        
+
         // Change direction if mouse is within window
         if (Input.mousePosition.x >= 0 && Input.mousePosition.y >= 0
                 && Input.mousePosition.x <= Screen.width && Input.mousePosition.y <= Screen.height) {
             ChangePlayerDirection();
         }
+    }
 
+    // Set movement boundaries
+    private void LateUpdate() {
+        Vector2 restrictedPosition = playerRB.position;
+        restrictedPosition.x = Mathf.Clamp(playerRB.position.x, -12.06596f, 11.81223f);
+        restrictedPosition.y = Mathf.Clamp(playerRB.position.y, -7.054649f, 7.02379f);
+        playerRB.position = restrictedPosition;
+    }
+
+    private void Update() {
+        KillIfHealthDepleted();
     }
 
     // Health
@@ -91,24 +111,32 @@ public class Player : Entity {
     private void MovePlayer() {
         // Keyboard movement
         Vector2 userInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        Vector2 movementMagnitude =
-            userInput.normalized * Time.deltaTime * speed;
+        Vector2 movementMagnitude = userInput.normalized * Time.deltaTime * speed;
 
         // Animate player
         playerAnimator.SetFloat("HorizontalSpeed", Mathf.Abs(movementMagnitude.x));
         playerAnimator.SetFloat("VerticalSpeed", Mathf.Abs(movementMagnitude.y));
 
-        // Don't allow movement beyond these bounds:
-        if (player.position.y >= 7.02379 && userInput.y > 0
-            || player.position.y <= -7.054649 && userInput.y < 0) {
-            movementMagnitude.y = 0;
+        playerRB.MovePosition(playerRB.position + movementMagnitude);
+
+        // Dash if able
+        if (canDash && !justDashed && Input.GetKeyDown(KeyCode.Space)) {
+            Vector2 dashDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            justDashed = true;
+
+            StartCoroutine(Dash(dashDir));
         }
-        if (player.position.x >= 11.81223 && userInput.x > 0
-                   || player.position.x <= -12.06596 && userInput.x < 0) {
-            movementMagnitude.x = 0;
+    }
+
+    IEnumerator Dash(Vector2 direction) {
+        float dashLength = 0.8f;
+        while (dashLength > 0) {
+            playerRB.MovePosition(playerRB.position + (direction * dashIntensity));
+            dashLength -= Time.deltaTime;
         }
 
-        player.MovePosition(player.position + movementMagnitude);
+        yield return new WaitForSeconds(dashCooldown);
+        justDashed = false;
     }
 
     private void ChangePlayerDirection() {
@@ -144,6 +172,10 @@ public class Player : Entity {
     public void UpgradeAttackPwr(int attkPwr) {
         projectileAttkPwrBonus = attkPwr;
         gun.UpdateGun(projectileAttkPwrBonus);
+    }
+
+    public void SetCanDash(bool canDash) {
+        this.canDash = canDash;
     }
 
 }

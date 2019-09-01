@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+// Controls which upgrade tier to display on the upgrades screen
 public class UpgradesWindowManager : MonoBehaviour {
 
     // Information-displaying panels
