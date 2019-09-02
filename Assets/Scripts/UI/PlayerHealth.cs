@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour {
 
+    [Header("Player Properties")]
     public Player player;
     public GameObject playerHealthHUD;
 
+    [Header("Display Properties")]
     public Text currentHealth;
     public Text maxHealth;
 

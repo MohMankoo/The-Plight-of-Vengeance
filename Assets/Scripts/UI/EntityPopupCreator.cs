@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class EntityPopupCreator : MonoBehaviour {
 
+    [Header("General")]
     public Text entityText;
     public static float destroyTime = 0.6f;
 

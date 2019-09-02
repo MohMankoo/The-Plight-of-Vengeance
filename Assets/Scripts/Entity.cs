@@ -4,12 +4,14 @@ using System.Collections;
 public class Entity : MonoBehaviour {
 
     protected int health;
-    public float speed;
-    public float turnSpeed;
-    protected bool movementStopped = false;
 
     // Used to display information above characters
     protected EntityPopupCreator entityPopup;
+
+    [Header("Movement")]
+    public float speed;
+    public float turnSpeed;
+    protected bool movementStopped = false;
 
     public void DepleteHealth(int hitPoints) {
         if (health >= hitPoints)

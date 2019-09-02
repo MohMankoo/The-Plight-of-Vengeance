@@ -4,8 +4,11 @@ public class PlayerGun : Gun {
 
     private Animator gunAnimator;
     private GameObject player;
+
+    [Header("Bullet")]
     public GameObject bullet;  // Bullet the gun uses
 
+    [Header("Visual Effects")]
     public CameraShake cameraShake;
 
     // Start is called before the first frame update

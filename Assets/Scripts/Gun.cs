@@ -2,17 +2,18 @@
 
 public class Gun : MonoBehaviour {
 
-    // Bullet options  
+    [Header("Attack Power")]
     public int attackPower;
     public int projectileAttkPwrBonus;
 
+    [Header("Projectile Properties")]
     public float projectileSizeFactor;
     public float projectileSpeed;
 
     // Jarr the gun to stop functionality
-    protected bool jarred = false; 
+    protected bool jarred = false;
 
-    // Cooldown options
+    [Header("Cooldown")]
     public float fixedCooldownTillNextShot;
     public float cooldownTillNextShot;
 

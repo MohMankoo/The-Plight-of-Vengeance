@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour {
     private GameObject shooter;
 
     // Bullet behaviour
+    [Header("Projectile settings")]
     public int attackPower;
     public float projectileSizeFactor;
     public float projectileSpeed;

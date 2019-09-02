@@ -7,6 +7,7 @@ public class Enemy : Entity {
     // int key = each Enemy will keep track of its order of creation
     //           given by an integer (formula: len(createdEnemies) + 1)
     // Enemy value = the Enemy associated with the key
+    [HideInInspector]
     public static Dictionary<int, Enemy> currentEnemies = new Dictionary<int, Enemy>();
 
     // Unity component References
@@ -14,14 +15,13 @@ public class Enemy : Entity {
     protected Transform playerTransform;
     protected Animator enemyAnimator;
     
+    [Header("Enemy Attributes")]
     public EnemyGun gun;
-
-    // Attributes
     public int enemyIdentifier;  // The key of a specific instance in createdEnemies
     public int revengeScoreReward;
 
-    // Repelling attributes
-    public float repelAmount = 2f;
+    [Header("Repelling Attributes")]
+    public static float repelAmount = 2f;
     
     public void InitializeEnemy(Enemy enemy, int health, int revengeScoreReward, float speed, float turnSpeed) {
         // Update reference information

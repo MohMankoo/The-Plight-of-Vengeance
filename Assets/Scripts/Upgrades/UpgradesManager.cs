@@ -6,11 +6,10 @@ using UnityEngine.UI;
 // Controls Player upgrades: purchase, buying feedback, updates to upgrades screen.
 public class UpgradesManager : MonoBehaviour {
 
-    // Player information
     private Player player;
-    public Text revengeScoreLabel;
 
     // References to Upgrade images
+    [Header("Upgrades Images")]
     public Image healthSprite;
     public Image speedSprite;
     public Image attackPwrSprite;
@@ -22,11 +21,13 @@ public class UpgradesManager : MonoBehaviour {
     private int attackPowerUpgradeLevel;
     private int gunUpgradeLevel;
 
-    // Misc
-    private EntityPopupCreator revengeCostGraphics;
-    public MouseCursor mouseCursorHandler;
+    [Header("HUD")]
+    public Text revengeScoreLabel;  // Used to display the revenge score on HUD
 
-    // Start is called before the first frame update
+    [Header("Misc")]
+    public MouseCursor mouseCursorHandler;
+    private EntityPopupCreator revengeCostGraphics;
+
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         revengeCostGraphics = GetComponent<EntityPopupCreator>();

@@ -3,24 +3,29 @@ using System.Collections;
 
 public class Player : Entity {
     
-    // Unity components
+    // Player components
     private Rigidbody2D playerRB;
     private Animator playerAnimator;
+
+    [Header("Health")]
     public PlayerHealth playerHealthDisplay;  // Game HUD
-
-    public PlayerGun gun;
-    public CameraShake cameraShake;
-
-    // Player stats
     public int maxHealth = 100;
+
+    [Header("Progress")]
     public int revengeScore = 0;
+
+    [Header("Player Gun")]
+    public PlayerGun gun;
     public int projectileAttkPwrBonus = 1;
 
-    // Dashing
+    [Header("Dashing")]
     public bool canDash;
-    private bool justDashed;
     public float dashCooldown = 3f;
     public float dashIntensity = 500;
+    private bool justDashed;
+
+    [Header("Visual effects")]
+    public CameraShake cameraShake;
 
     private void Start() {
         // Initialize properties

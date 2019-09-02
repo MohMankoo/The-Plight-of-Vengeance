@@ -5,24 +5,25 @@ using UnityEngine;
 // Controls entering the game from the upgrades screen and vice versa
 public class UpgradesGateway : MonoBehaviour {
     
-    // Player and Enemies
-    private Player player;
+    [Header("Entities")]
     public PlayerHealth playerHealthDisplay;
     public GameObject spawner;
+    private Player player;
 
-    // Cursor 
-    public MouseCursor mouseCursorHandler;
-
-    // For showing "Revived message" upon player death
+    // The following components are needed to show the REVIVAL display upon death
+    [Header("Player Revival")]
     public Canvas gameHUD;
     public GameObject revivedDisplay;
 
     // Upgrades screen information
+    [Header("Upgrades Screen")]
     public Canvas upgradesCanvas;
-    private Animator upgradesCanvasAninmator;
-
     public UpgradesSwitcher upgradesSwitcher;
     public GameObject upgradeButtonSelectedOnRevival;
+    private Animator upgradesCanvasAninmator;
+
+    [Header("Cursors")]
+    public MouseCursor mouseCursorHandler;
 
     private bool gameOver;
 

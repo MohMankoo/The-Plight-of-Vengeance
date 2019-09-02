@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerFollow : MonoBehaviour {
 
     private Player player;
-    public Vector3 offset;
+    public Vector3 offsetFromPlayer;
 
     private void Start() {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -16,6 +16,6 @@ public class PlayerFollow : MonoBehaviour {
     void Update() {
         // Follow player only if they are alive
         if (!player.IsDead())
-            transform.position = player.transform.position - offset;
+            transform.position = player.transform.position - offsetFromPlayer;
     }
 }

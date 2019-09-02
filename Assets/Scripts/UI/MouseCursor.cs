@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class MouseCursor : MonoBehaviour {
 
-    private Texture2D gameCursorTexture;
+    [Header("Game Cursors")]
     public TextAsset zykaCursor;
     public TextAsset XGunCursor;
     public TextAsset VGunCursor;
+    private Texture2D gameCursorTexture;
 
     // Setup gameCursorTexture and default it to the cursor for the Zyka gun
     private void Start() {

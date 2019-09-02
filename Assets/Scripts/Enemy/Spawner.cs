@@ -4,22 +4,25 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour {
 
+    [Header("Round Display Information")]
+    public Canvas gameHUD;
+    public GameObject rouncCompleteDisplay;
+
     // The indices of the enemies correspond to the indices of fixedSpawnTimes
     // So, enemies[i]'s spawn time = fixedSpawnTimes[i]
+    [Header("Enemy types")]
     public GameObject[] enemies;
+
+    [Header("Spawn Points")]
     public Transform[] spawnPoints;
+
+    [Header("Spawn Times")]
+    public float[] fixedSpawnTimes;  // Spawn times for final wave - Wave 7
+    private float[] spawnTimes;
 
     // Current wave information
     private List<GameObject> waveEnemies;
     private int waveNumber;
-
-    // Spawn times for final wave - Wave 7
-    public float[] fixedSpawnTimes;
-    private float[] spawnTimes;
-
-    // Round Display Information
-    public Canvas gameHUD;
-    public GameObject rouncCompleteDisplay;
 
     private void Start() {
         // Initialize spawn time values
