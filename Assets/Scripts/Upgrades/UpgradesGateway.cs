@@ -95,32 +95,38 @@ public class UpgradesGateway : MonoBehaviour {
         mouseCursorHandler.EnableMenuCursor();
     }
 
-    // Transition from or to the upgrades screen
-    // If enteringUpgrades, turn on Upgrades canvas and turn off spawner, else do the opposite
+    // Transition from or to the upgrades screen.
+    // If enteringUpgrades, turn on Upgrades canvas and turn off spawner, else do the opposite.
     IEnumerator TriggerUpgradesTransition(bool enteringUpgrades) {
-        // Spawner
+        // While transitioning, disable upgrade selection
+        upgradesSwitcher.ToggleUpgradeSelection(false);
+
+        // Spawner - wait a bit so enemies do not awkwardly disappear.
         yield return new WaitForSeconds(0.2f);
         if (enteringUpgrades)
             spawner.SetActive(false);
         else
             spawner.SetActive(true);
 
-        // Upgrades canvas
+        // Toggle visibility
         yield return new WaitForSeconds(0.85f);
         upgradesCanvas.gameObject.SetActive(enteringUpgrades);
 
-        // Select health upgrade button/toggle by default on enter/exit
-        upgradesSwitcher.ToggleUpgradeButton(upgradeButtonSelectedOnRevival);
-
-        // Trigger animation for entering Upgrades AFTER Upgrades panel has been re-activated
+        // Trigger animation for entering Upgrades AFTER Upgrades panel has been re-activated.
         // to prevent buggy behaviour
         if (enteringUpgrades) {
+            // Select health upgrade button/toggle by default on entering upgrades.
+            upgradesSwitcher.ToggleUpgradeSelectionButton(upgradeButtonSelectedOnRevival);
+
             upgradesCanvasAninmator.SetTrigger("enterUpgrades");
 
-            // After x seconds, disable animator as it prevents upgrade images from changing color
-            yield return new WaitForSeconds(1f);
+            // After x seconds, disable animator as it prevents upgrade images from changing color.
+            yield return new WaitForSeconds(0.4f);
             upgradesCanvasAninmator.enabled = false;
         }
+
+        // Allow user to select upgrades
+        upgradesSwitcher.ToggleUpgradeSelection(true);
     }
 
 }

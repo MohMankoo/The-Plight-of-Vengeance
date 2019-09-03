@@ -5,7 +5,8 @@ using UnityEngine.UI;
 // Controls which upgrade tier to display on the upgrades screen
 public class UpgradesSwitcher : MonoBehaviour {
 
-    // Information-displaying panels
+    // Information-displaying panel (on the right)
+    [Header("Upgrades Display")]
     public GameObject upgradeInfoPanel;
     private List<GameObject> upgradeInfoOptions;  // Individual panels for each upgrade
 
@@ -13,6 +14,11 @@ public class UpgradesSwitcher : MonoBehaviour {
     // The following are stored as tags
     private string lastUpgradeInfoOptionSelected;
     private string selectedUpgradeOption;
+
+    // The menu selection buttons are disabled/enabled to control their functionality
+    // when moving in and out of the upgrades screen/
+    [Header("Upgrades Selection")]
+    public List<GameObject> upgradeSelectionButtons;
 
     // Start is called before the first frame update
     void Start() {
@@ -34,9 +40,16 @@ public class UpgradesSwitcher : MonoBehaviour {
         }
     }
 
+    // Enable/Disable interactability for ALL selection buttons
+    public void ToggleUpgradeSelection(bool enabled) {
+        foreach (GameObject button in upgradeSelectionButtons) {
+            button.GetComponent<Toggle>().interactable = enabled;
+        }
+    }
+
     // Manually toggle which button should be selected
     // Used upon player revival when the Upgrades screen is re-entered
-    public void ToggleUpgradeButton(GameObject upgradeButton) {
+    public void ToggleUpgradeSelectionButton(GameObject upgradeButton) {
         upgradeButton.GetComponent<Toggle>().isOn = true;
         SwitchToUpgradeGivenBy(upgradeButton);
     }

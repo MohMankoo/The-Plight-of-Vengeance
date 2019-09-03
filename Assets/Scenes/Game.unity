@@ -3751,13 +3751,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealthDisplay: {fileID: 534652598}
   spawner: {fileID: 961019825}
-  mouseCursorHandler: {fileID: 857072542}
   gameHUD: {fileID: 2009834505}
   revivedDisplay: {fileID: 6013616639680512023, guid: a5bde79bc17cc3d4db2782cf0c1b05dc,
     type: 3}
   upgradesCanvas: {fileID: 700813222}
   upgradesSwitcher: {fileID: 1811458403}
   upgradeButtonSelectedOnRevival: {fileID: 1634201969}
+  mouseCursorHandler: {fileID: 857072542}
 --- !u!4 &857072540
 Transform:
   m_ObjectHideFlags: 0
@@ -4338,6 +4338,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e051298043df23046b77792ef3bbf675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameHUD: {fileID: 2009834505}
+  rouncCompleteDisplay: {fileID: 6013616639680512023, guid: a55b18ba8a764c14da1d030de7d2a55d,
+    type: 3}
   enemies:
   - {fileID: 5402421255988075669, guid: e0079fc7072e7254eb2c8b5f49fd745c, type: 3}
   - {fileID: 5402421255988075669, guid: 81fc33f31c3016148960faa8e3012a45, type: 3}
@@ -4354,9 +4357,6 @@ MonoBehaviour:
   - 12
   - 20
   - 60
-  gameHUD: {fileID: 2009834505}
-  rouncCompleteDisplay: {fileID: 6013616639680512023, guid: a55b18ba8a764c14da1d030de7d2a55d,
-    type: 3}
 --- !u!1 &970297112
 GameObject:
   m_ObjectHideFlags: 0
@@ -7005,7 +7005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e5cadee3fa444044b8cb78696acf7df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0, y: 0, z: 5}
+  offsetFromPlayer: {x: 0, y: 0, z: 0}
 --- !u!1 &1752298929
 GameObject:
   m_ObjectHideFlags: 0
@@ -7050,11 +7050,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b475b5cfa80f9ba41ac8f50644e9b4a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  revengeScoreLabel: {fileID: 1295714868}
   healthSprite: {fileID: 113202155}
   speedSprite: {fileID: 83531106}
   attackPwrSprite: {fileID: 1379897381}
   gunSprite: {fileID: 1548929937}
+  revengeScoreLabel: {fileID: 1295714868}
   mouseCursorHandler: {fileID: 857072542}
 --- !u!114 &1752298932
 MonoBehaviour:
@@ -7298,6 +7298,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeInfoPanel: {fileID: 16206061}
+  upgradeSelectionButtons:
+  - {fileID: 1634201969}
+  - {fileID: 565502830}
+  - {fileID: 403860064}
+  - {fileID: 1570014487}
 --- !u!4 &1811458404
 Transform:
   m_ObjectHideFlags: 0
@@ -8289,14 +8294,14 @@ MonoBehaviour:
   speed: 4
   turnSpeed: 10
   playerHealthDisplay: {fileID: 534652598}
-  gun: {fileID: 1511479928}
-  cameraShake: {fileID: 656403460}
   maxHealth: 100
   revengeScore: 0
+  gun: {fileID: 1511479928}
   projectileAttkPwrBonus: 1
   canDash: 0
   dashCooldown: 1
   dashIntensity: 2.5
+  cameraShake: {fileID: 656403460}
 --- !u!50 &2084425878
 Rigidbody2D:
   serializedVersion: 4
