@@ -57,7 +57,6 @@ public class UpgradesGateway : MonoBehaviour {
 
         player.StopMovement(false);
         player.gun.Jarr(false);
-
         playerHealthDisplay.ResetDisplayColours();
         playerHealthDisplay.SetVisible(true);
 
@@ -77,14 +76,12 @@ public class UpgradesGateway : MonoBehaviour {
     public void EnterUpgrades() {
         player.StopMovement(true);
         player.gun.Jarr(true);
-
         playerHealthDisplay.SetVisible(false);
 
         // Show REVIVED message
         GameObject revivedDisplayMsg =
                     Instantiate(revivedDisplay, gameHUD.transform.position, Quaternion.identity);
         revivedDisplayMsg.transform.SetParent(gameHUD.transform);
-
         Destroy(revivedDisplayMsg, 1.2f);
 
         // Set animator information

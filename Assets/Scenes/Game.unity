@@ -4353,8 +4353,8 @@ MonoBehaviour:
   - {fileID: 184501692}
   - {fileID: 1087781968}
   fixedSpawnTimes:
-  - 4
-  - 12
+  - 3
+  - 10
   - 20
   - 60
 --- !u!1 &970297112

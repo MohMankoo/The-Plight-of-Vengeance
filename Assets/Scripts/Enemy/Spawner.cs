@@ -27,18 +27,32 @@ public class Spawner : MonoBehaviour {
     private void Start() {
         // Initialize spawn time values
         spawnTimes = new float[fixedSpawnTimes.Length];
-
         for (int i = 0; i < fixedSpawnTimes.Length; i++) {
             spawnTimes[i] = fixedSpawnTimes[i];
         }
 
-        // Set to non-valid wave # so that update can increment it to a valid wave once spawner is activated
+        // Setup a clean wave
+        // Let wave 0 indicate the "wave" preceding the start of the game
         waveNumber = 0;
+        waveEnemies = new List<GameObject>();
     }
 
     private void Update() {
+        // If wave 7, loop through the times for each enemy and spawn them when necessary
+        if (waveNumber == 7)
+            for (int i = 0; i < enemies.Length; i++) {
+                if (spawnTimes[i] <= 0) {
+                    int spawnPoint = Random.Range(0, spawnPoints.Length - 1);  // Randomize the spawn
+                    Instantiate(enemies[i], spawnPoints[spawnPoint].position, Quaternion.identity);
+
+                    spawnTimes[i] = fixedSpawnTimes[i];  // Reset timer
+                } else {
+                    spawnTimes[i] -= Time.deltaTime;
+                }
+            }
+
         // Create waves once previous wave enemies are dead
-        if (AllElementsNull(waveEnemies) && waveNumber < 7) {
+        if (waveNumber < 7 && (waveEnemies.Count == 0 || AllElementsNull(waveEnemies))) {
             waveNumber++;
 
             // Display Round Complete message for its duration of 1.2f
@@ -70,26 +84,16 @@ public class Spawner : MonoBehaviour {
                     break;
                 case 6:
                     waveEnemies = CreateWave(enemies[0], null, null, enemies[0], enemies[3]);
+
+                    // Prepare for the infinite wave - Wave 7
+                    // Have at least one enemy ready for the player to fight
+                    spawnTimes[0] = 0;
                     break;
                 default:
                     break;  // Go to wave 7 below
             }
-        }
+        }  // End of if
 
-        // If wave 7, loop through the times for each enemy and spawn them when necessary
-        if (waveNumber == 7)
-            for (int i = 0; i < enemies.Length; i++) 
-            {
-                if (spawnTimes[i] <= 0) {
-                    int spawnPoint = Random.Range(0, spawnPoints.Length - 1);  // Randomize the position
-                    Instantiate(enemies[i], spawnPoints[spawnPoint].position, Quaternion.identity);
-
-                    spawnTimes[i] = fixedSpawnTimes[i];  // Reset timer
-                } else {
-                    spawnTimes[i] -= Time.deltaTime;
-                }
-            }
-        
     }
 
     // Pass in the enemy that should be spawned at each of the spawn points, null otherwise
@@ -127,21 +131,36 @@ public class Spawner : MonoBehaviour {
     }
 
     // When the script is reset
-    private void OnEnable() {
-        // Destory all alive enemies
-        if (waveEnemies != null)
-            foreach (GameObject enemy in waveEnemies)
-                if (enemy) Destroy(enemy);
+    void OnEnable() {
+        Debug.Log("Spawner enabled");
+        Debug.Log("Wave enemies:");
+        foreach (var enemy in waveEnemies) {
+            Debug.Log(enemy);
+        }
 
-        // Restart script
-        Start();
+        DestroyWave();
+        Start();  // Start waves from 0
     }
 
-    private void OnDisable() {
-        // Destory all alive enemies
-        if (waveEnemies != null)
+    /*void OnDisable() {
+        Debug.Log("Spawner disabled");
+        Debug.Log("Wave enemies:");
+        foreach (var enemy in waveEnemies) {
+            Debug.Log(enemy);
+        }
+
+        DestroyWave();
+    }*/
+
+    // Destory all alive wave enemies
+    // Note: the list waveEnemies is still unclean and needs to be remade (full of nulls)
+    // Start() will clean up this list automatically
+    private void DestroyWave() {
+        if (waveEnemies != null) {
             foreach (GameObject enemy in waveEnemies)
                 if (enemy) Destroy(enemy);
+            //waveEnemies = new List<GameObject>();
+        }
     }
 
 }

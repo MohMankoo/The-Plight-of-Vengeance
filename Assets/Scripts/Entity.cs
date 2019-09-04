@@ -24,6 +24,10 @@ public class Entity : MonoBehaviour {
         return health <= 0;
     }
 
+    public void Kill() {
+        DepleteHealth(health);
+    }
+
     public void StopMovement(bool movementStopped) {
         this.movementStopped = movementStopped;
     }

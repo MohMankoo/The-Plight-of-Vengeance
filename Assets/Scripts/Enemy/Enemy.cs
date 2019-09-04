@@ -36,21 +36,19 @@ public class Enemy : Entity {
         this.speed = speed;
         this.turnSpeed = turnSpeed;
 
+        // Update list of enemies
         enemyIdentifier = currentEnemies.Count + 1;  // Create new key
         currentEnemies.Add(enemyIdentifier, enemy); // Add enemy with associated key (enemyIdentifier)
-
-        Debug.Log("Enemy created: " + enemyIdentifier + "- Total: " + currentEnemies.Count);
+        Debug.Log("Enemy created: #" + enemyIdentifier + " | Total: " + currentEnemies.Count);
     }
 
     public void OnEnemyUpdate() {
         if (movementStopped)
             return;
+        if (!player)  // If Player is null
+            return;
 
         KillIfHealthDepleted();
-
-        // Return if player object is null
-        if (!player)
-            return;
 
         // Stop functionality if player is dead
         if (player.IsDead()) {
@@ -62,7 +60,7 @@ public class Enemy : Entity {
         // Repel from other enemies if too close
         RepelOtherEnemies();
 
-        // Move towrads player if not dead
+        // Move towrads player
         MoveTowardsPlayer();
     }
 
@@ -98,10 +96,17 @@ public class Enemy : Entity {
                 transform, revengeScoreReward);
 
             // Last-minute funtionality
-            player.revengeScore += revengeScoreReward;
-            currentEnemies.Remove(this.enemyIdentifier);  // Remove from list of alive enemies
+            player.revengeScore += revengeScoreReward;  // Award Player
+            bool removedSuccessfuly = currentEnemies.Remove(this.enemyIdentifier);  // Remove from list of alive enemies
+            Debug.Log("Enemy was removed: " + removedSuccessfuly);
+
             Destroy(gameObject, 2);
         }
+    }
+
+    private void OnDestroy() {
+        bool removedSuccessfuly = currentEnemies.Remove(this.enemyIdentifier);  // Remove from list of alive enemies
+        Debug.Log("Enemy was removed: " + removedSuccessfuly);
     }
 
     public void RepelOtherEnemies() {
