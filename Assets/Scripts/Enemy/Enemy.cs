@@ -10,9 +10,12 @@ public class Enemy : Entity {
     [HideInInspector]
     public static Dictionary<int, Enemy> currentEnemies = new Dictionary<int, Enemy>();
 
-    // Unity component References
+    // Player References
     protected Player player;
     protected Transform playerTransform;
+
+    // Enemy component references
+    protected Rigidbody2D enemyRB;
     protected Animator enemyAnimator;
     
     [Header("Enemy Attributes")]
@@ -28,6 +31,7 @@ public class Enemy : Entity {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         enemyAnimator = GetComponent<Animator>();
+        enemyRB = GetComponent<Rigidbody2D>();
         entityPopup = GetComponent<EntityPopupCreator>();
 
         // Set enemy information
@@ -35,6 +39,10 @@ public class Enemy : Entity {
         this.revengeScoreReward = revengeScoreReward;
         this.speed = speed;
         this.turnSpeed = turnSpeed;
+
+        // Set animator information
+        enemyAnimator.SetBool("isPlayerDead", false);
+        enemyAnimator.SetFloat("enemyHealth", this.health);
 
         // Update list of enemies
         enemyIdentifier = currentEnemies.Count + 1;  // Create new key
@@ -58,10 +66,18 @@ public class Enemy : Entity {
         }
 
         // Repel from other enemies if too close
-        RepelOtherEnemies();
+        // RepelOtherEnemies();
 
         // Move towrads player
         MoveTowardsPlayer();
+    }
+
+    // Set movement boundaries
+    private void LateUpdate() {
+        Vector2 restrictedPosition = enemyRB.position;
+        restrictedPosition.x = Mathf.Clamp(enemyRB.position.x, GameManager.MIN_X_BOUNDARY, GameManager.MAX_X_BOUNDARY);
+        restrictedPosition.y = Mathf.Clamp(enemyRB.position.y, GameManager.MIN_Y_BOUNDARY, GameManager.MAX_Y_BOUNDARY);
+        enemyRB.position = restrictedPosition;
     }
 
     public void MoveTowardsPlayer() {

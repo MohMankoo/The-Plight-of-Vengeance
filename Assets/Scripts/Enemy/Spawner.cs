@@ -43,7 +43,7 @@ public class Spawner : MonoBehaviour {
             for (int i = 0; i < enemies.Length; i++) {
                 if (spawnTimes[i] <= 0) {
                     int spawnPoint = Random.Range(0, spawnPoints.Length - 1);  // Randomize the spawn
-                    Instantiate(enemies[i], spawnPoints[spawnPoint].position, Quaternion.identity);
+                    waveEnemies.Add(Instantiate(enemies[i], spawnPoints[spawnPoint].position, Quaternion.identity));
 
                     spawnTimes[i] = fixedSpawnTimes[i];  // Reset timer
                 } else {
@@ -52,7 +52,7 @@ public class Spawner : MonoBehaviour {
             }
 
         // Create waves once previous wave enemies are dead
-        if (waveNumber < 7 && (waveEnemies.Count == 0 || AllElementsNull(waveEnemies))) {
+        if (waveNumber < 7 && (waveEnemies.Count == 0 || AreAllElementsNull(waveEnemies))) {
             waveNumber++;
 
             // Display Round Complete message for its duration of 1.2f
@@ -102,24 +102,24 @@ public class Spawner : MonoBehaviour {
                 GameObject bottomLeftEnemy, GameObject bottomRightEnemy, GameObject CenterEnemy) {
 
         // Create list of all spawned enemies
-        List<GameObject> waveEnemies = new List<GameObject>();
+        List<GameObject> wave = new List<GameObject>();
         Quaternion faceDown = new Quaternion(0, 0, 180, 0);
 
         if (topLeftEnemy)
-            waveEnemies.Add(Instantiate(topLeftEnemy, spawnPoints[0].position, faceDown));
+            wave.Add(Instantiate(topLeftEnemy, spawnPoints[0].position, faceDown));
         if (topRightEnemy)
-            waveEnemies.Add(Instantiate(topRightEnemy, spawnPoints[1].position, faceDown));
+            wave.Add(Instantiate(topRightEnemy, spawnPoints[1].position, faceDown));
         if (bottomLeftEnemy)
-            waveEnemies.Add(Instantiate(bottomLeftEnemy, spawnPoints[2].position, faceDown));
+            wave.Add(Instantiate(bottomLeftEnemy, spawnPoints[2].position, faceDown));
         if (bottomRightEnemy)
-            waveEnemies.Add(Instantiate(bottomRightEnemy, spawnPoints[3].position, faceDown));
+            wave.Add(Instantiate(bottomRightEnemy, spawnPoints[3].position, faceDown));
         if (CenterEnemy)
-            waveEnemies.Add(Instantiate(CenterEnemy, spawnPoints[4].position, faceDown));
+            wave.Add(Instantiate(CenterEnemy, spawnPoints[4].position, faceDown));
 
-        return waveEnemies;
+        return wave;
     }
 
-    private bool AllElementsNull(List<GameObject> list) {
+    private bool AreAllElementsNull(List<GameObject> list) {
         if (list == null) return true;
 
         // Only fail condition - at least one element is not null
