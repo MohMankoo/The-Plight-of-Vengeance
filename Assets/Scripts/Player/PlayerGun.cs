@@ -45,7 +45,7 @@ public class PlayerGun : Gun {
         this.projectileAttkPwrBonus = projectileAttkPwrBonus;
 
         if (tag.Equals("Zyka")) {
-            tag = "Zyka";
+            this.tag = "Zyka";
             gunAnimator.SetInteger("gunType", 1);
 
             attackPower = 15;
@@ -54,7 +54,7 @@ public class PlayerGun : Gun {
             fixedCooldownTillNextShot = 0.2f;
 
         } else if (tag.Equals("X-Gun")) {
-            tag = "X-Gun";
+            this.tag = "X-Gun";
             gunAnimator.SetInteger("gunType", 2);
 
             attackPower = 15;
@@ -62,8 +62,8 @@ public class PlayerGun : Gun {
             projectileSpeed = 35;
             fixedCooldownTillNextShot = 0.1f;
 
-        } else {  // V-Gun
-            tag = "V-Gun";
+        } else if (tag.Equals("V-Gun")) {
+            this.tag = "V-Gun";
             gunAnimator.SetInteger("gunType", 3);
 
             attackPower = 15;

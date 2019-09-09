@@ -22,7 +22,7 @@ public class EntityPopupCreator : MonoBehaviour {
         revengeScoreText.color = new Color(255f, 198f, 0f);  // Bright yellow
 
         // Offset text so it does not overlap damage text
-        Vector3 revengeScoreOffset = new Vector3(0.5f, 0.5f, 0);  // Move up y-axis
+        Vector3 revengeScoreOffset = new Vector3(0.6f, 0.9f, 0);  // Move up y-axis
         revengeScoreText.transform.position += revengeScoreOffset;
 
         Destroy(revengeScoreText, destroyTime);

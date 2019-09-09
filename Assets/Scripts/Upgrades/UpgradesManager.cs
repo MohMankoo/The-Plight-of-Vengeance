@@ -195,6 +195,9 @@ public class UpgradesManager : MonoBehaviour {
 
             attackPwrSprite.sprite = Resources.Load<Sprite>("Upgrades/DamageUpgrade" + attackPowerUpgradeLevel);
             attackPwrSprite.color = new Color32(255, 255, 255, 255); // Make sprite visible upon first upgrade
+
+            // Update projectile bonus on the gun
+            player.gun.UpdateGun(player.projectileAttkPwrBonus);
             return true;
 
         } else if (level == 2 && player.revengeScore >= 1500) {
@@ -204,6 +207,7 @@ public class UpgradesManager : MonoBehaviour {
             attackPowerUpgradeLevel++;
 
             attackPwrSprite.sprite = Resources.Load<Sprite>("Upgrades/DamageUpgrade" + attackPowerUpgradeLevel);
+            player.gun.UpdateGun(player.projectileAttkPwrBonus);
             return true;
 
         } else if (level == 3 && player.revengeScore >= 3000) { // Level 3
@@ -213,11 +217,10 @@ public class UpgradesManager : MonoBehaviour {
             attackPowerUpgradeLevel++;
 
             attackPwrSprite.sprite = Resources.Load<Sprite>("Upgrades/DamageUpgrade" + attackPowerUpgradeLevel);
+            player.gun.UpdateGun(player.projectileAttkPwrBonus);
             return true;
         }
 
-        // Update projectile bonus on the gun!
-        player.gun.UpdateGun(player.gun.tag, player.projectileAttkPwrBonus);
         return false; // Failure to upgrade
     }
     
