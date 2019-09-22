@@ -6,6 +6,7 @@ public class EntityPopupCreator : MonoBehaviour {
     [Header("General")]
     public Text entityText;
     public static float destroyTime = 0.6f;
+    public static float shopDestroyTime = 1.2f;
 
     public void CreateDamageText(Transform entity, int damage) {
         Text damageText = CreateTemporaryText(entity, "EntityCanvas");
@@ -28,17 +29,17 @@ public class EntityPopupCreator : MonoBehaviour {
         Destroy(revengeScoreText, destroyTime);
     }
 
-    // For Upgrade button in Upgrades shop
-    // Used by UpgradesManager
+    // Create a text popup meant to portray negativity.
+    // For Upgrade button in Upgrades shop. Used by UpgradesManager.
     public void CreateNegativeRevengeText(Transform upgradeButton, string feedbackText) {
         Text revengeCostText = CreateTemporaryText(upgradeButton, "");  // Canvas tag not needed
 
         // Change text formatting
-        revengeCostText.fontSize = 120;
+        revengeCostText.fontSize = 85;
         revengeCostText.text = feedbackText;
         revengeCostText.color = new Color32(255, 255, 255, 255);
 
-        Destroy(revengeCostText, destroyTime);
+        Destroy(revengeCostText, shopDestroyTime);
     }
 
     // canvasTag: determines which canvas to spawn text on
