@@ -3,10 +3,12 @@ using System.Collections;
 
 public class Entity : MonoBehaviour {
 
-    protected int health;
-
     // Used to display information above characters
     protected EntityPopupCreator entityPopup;
+
+    [Header("Health")]
+    protected int health;
+    protected bool isInvincible = false;
 
     [Header("Movement")]
     public float speed;
@@ -14,6 +16,8 @@ public class Entity : MonoBehaviour {
     protected bool movementStopped = false;
 
     public void DepleteHealth(int hitPoints) {
+        if (isInvincible) return;
+
         if (health >= hitPoints)
             SetHealth(health - hitPoints);
         else
@@ -25,7 +29,8 @@ public class Entity : MonoBehaviour {
     }
 
     public void Kill() {
-        DepleteHealth(health);
+        if (!isInvincible)
+            DepleteHealth(health);
     }
 
     public void StopMovement(bool movementStopped) {

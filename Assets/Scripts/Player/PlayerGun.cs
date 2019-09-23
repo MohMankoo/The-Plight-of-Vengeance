@@ -32,7 +32,7 @@ public class PlayerGun : Gun {
             {
                 Shoot(player, bullet);
                 gunAnimator.SetTrigger("gunFired");
-                cameraShake.TriggerShaking(0.05f, 0.04f);
+                //cameraShake.TriggerShaking(0.05f, 0.04f);
 
                 cooldownTillNextShot = fixedCooldownTillNextShot;  // Reset cooldown
             }

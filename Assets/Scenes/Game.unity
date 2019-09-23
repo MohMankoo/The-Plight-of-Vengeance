@@ -4338,6 +4338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e051298043df23046b77792ef3bbf675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 2084425877}
   gameHUD: {fileID: 2009834505}
   rouncCompleteDisplay: {fileID: 6013616639680512023, guid: a55b18ba8a764c14da1d030de7d2a55d,
     type: 3}

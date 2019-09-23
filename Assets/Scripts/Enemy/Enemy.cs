@@ -43,7 +43,6 @@ public class Enemy : Entity {
         // Set animator information
         enemyAnimator.SetBool("isPlayerDead", false);
         enemyAnimator.SetFloat("enemyHealth", this.health);
-        Debug.Log("Setting enemy health to " + this.health);
 
         // Update list of enemies
         enemyIdentifier = currentEnemies.Count + 1;  // Create new key
@@ -106,7 +105,6 @@ public class Enemy : Entity {
             gun.Jarr(true);
 
             // Initiate death animation
-            Debug.Log("Changing enemy health to " + health);
             enemyAnimator.SetFloat("enemyHealth", health);
 
             // Craete revenge score label

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour {
 
+    public Player player;
+
     [Header("Round Display Information")]
     public Canvas gameHUD;
     public GameObject rouncCompleteDisplay;
@@ -67,6 +69,7 @@ public class Spawner : MonoBehaviour {
 
             // Wait a bit before starting next round if it is not the first wave
             inTransitionMode = true;
+            StartCoroutine(player.MakeInvincible(1.5f));
             yield return new WaitForSeconds(1f);
             inTransitionMode = false;
         }

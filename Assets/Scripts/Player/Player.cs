@@ -80,7 +80,7 @@ public class Player : Entity {
 
     private void KillIfHealthDepleted() {
         // Check if player should be dead
-        if (IsDead()) {
+        if (IsDead() && !isInvincible) {
             StopMovement(true);
             gun.Jarr(true);
 
@@ -101,15 +101,23 @@ public class Player : Entity {
     }
 
     public new void DepleteHealth(int hitPoints) {
-        base.DepleteHealth(hitPoints);
-        playerHealthDisplay.UpdateCurrentHealth(health);
-        playerAnimator.SetFloat("PlayerHealth", health);
+        if (!isInvincible) {
+            base.DepleteHealth(hitPoints);
+            playerHealthDisplay.UpdateCurrentHealth(health);
+            playerAnimator.SetFloat("PlayerHealth", health);
+        }
     }
 
     public void ReplenishFullHealth() {
         SetHealth(maxHealth);
         playerHealthDisplay.UpdateCurrentHealth(health);
         playerAnimator.SetFloat("PlayerHealth", health);
+    }
+
+    public IEnumerator MakeInvincible(float time) {
+        isInvincible = true;
+        yield return new WaitForSeconds(time);
+        isInvincible = false;
     }
 
     // Movement
@@ -130,6 +138,7 @@ public class Player : Entity {
             Vector2 dashDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             justDashed = true;
 
+            StartCoroutine(MakeInvincible(0.9f));
             StartCoroutine(Dash(dashDir));
         }
     }
