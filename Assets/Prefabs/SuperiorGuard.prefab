@@ -339,7 +339,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.11599187}
   serializedVersion: 2
-  m_Radius: 4.056882
+  m_Radius: 4.519406
 --- !u!95 &3779039203012003442
 Animator:
   serializedVersion: 3
@@ -374,6 +374,7 @@ MonoBehaviour:
   speed: 1.5
   turnSpeed: 20
   gun: {fileID: 5402421255174086702}
+  enemyIdentifier: 0
   revengeScoreReward: 400
 --- !u!114 &6248115271523853605
 MonoBehaviour:

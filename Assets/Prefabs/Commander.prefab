@@ -396,7 +396,6 @@ MonoBehaviour:
   gun: {fileID: 5402421255174086702}
   enemyIdentifier: 0
   revengeScoreReward: 2000
-  repelAmount: 2
 --- !u!114 &6248115271523853605
 MonoBehaviour:
   m_ObjectHideFlags: 0

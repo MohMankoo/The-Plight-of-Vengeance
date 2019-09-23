@@ -23,6 +23,8 @@ public class Spawner : MonoBehaviour {
     // Current wave information
     private List<GameObject> waveEnemies;
     private int waveNumber;
+    private bool lastWaveClear;
+    private bool inTransitionMode;
 
     private void Start() {
         // Initialize spawn time values
@@ -34,66 +36,88 @@ public class Spawner : MonoBehaviour {
         // Setup a clean wave
         // Let wave 0 indicate the "wave" preceding the start of the game
         waveNumber = 0;
+        lastWaveClear = true;
+        inTransitionMode = false;
         waveEnemies = new List<GameObject>();
     }
 
     private void Update() {
-        // If wave 7, loop through the times for each enemy and spawn them when necessary
-        if (waveNumber == 7)
-            for (int i = 0; i < enemies.Length; i++) {
-                if (spawnTimes[i] <= 0) {
-                    int spawnPoint = Random.Range(0, spawnPoints.Length - 1);  // Randomize the spawn
-                    waveEnemies.Add(Instantiate(enemies[i], spawnPoints[spawnPoint].position, Quaternion.identity));
-
-                    spawnTimes[i] = fixedSpawnTimes[i];  // Reset timer
-                } else {
-                    spawnTimes[i] -= Time.deltaTime;
-                }
-            }
+        // Focus on infinite wave if on wave 7
+        if (waveNumber == 7) {
+            ManageInfiniteWave();
+        }
 
         // Create waves once previous wave enemies are dead
-        if (waveNumber < 7 && (waveEnemies.Count == 0 || AreAllElementsNull(waveEnemies))) {
-            waveNumber++;
+        lastWaveClear = (waveEnemies.Count == 0 || AreAllElementsNull(waveEnemies));
+        if (waveNumber < 7 && lastWaveClear && !inTransitionMode) {
+            StartCoroutine(BeginWaveTransition());
+        }
+    }
 
+    // Begin preparing to transition to the next wave
+    IEnumerator BeginWaveTransition() {
+        waveNumber++; // Start next wave
+
+        if (waveNumber > 1) {
             // Display Round Complete message for its duration of 1.2f
-            if (waveNumber > 1) {
-                GameObject roundCompleteMsg = 
-                    Instantiate(rouncCompleteDisplay, gameHUD.transform.position, Quaternion.identity);
-                roundCompleteMsg.transform.SetParent(gameHUD.transform);
+            GameObject roundCompleteMsg =
+            Instantiate(rouncCompleteDisplay, gameHUD.transform.position, Quaternion.identity);
+            roundCompleteMsg.transform.SetParent(gameHUD.transform);
+            Destroy(roundCompleteMsg, 1.2f);
 
-                Destroy(roundCompleteMsg, 1.2f);
+            // Wait a bit before starting next round if it is not the first wave
+            inTransitionMode = true;
+            yield return new WaitForSeconds(1f);
+            inTransitionMode = false;
+        }
+
+        CraeteWave();
+    }
+
+    public void CraeteWave() {
+        lastWaveClear = false;
+
+        // Determine which wave to spawn
+        switch (waveNumber) {
+            case 1:
+                waveEnemies = CreateWave(enemies[0], enemies[0], null, null, enemies[0]);
+                break;
+            case 2:
+                waveEnemies = CreateWave(enemies[0], enemies[0], enemies[0], enemies[0], enemies[1]);
+                break;
+            case 3:
+                waveEnemies = CreateWave(enemies[1], enemies[1], enemies[0], enemies[0], enemies[1]);
+                break;
+            case 4:
+                waveEnemies = CreateWave(enemies[1], enemies[1], enemies[1], enemies[1], enemies[2]);
+                break;
+            case 5:
+                waveEnemies = CreateWave(enemies[2], enemies[2], enemies[1], enemies[1], enemies[2]);
+                break;
+            case 6:
+                waveEnemies = CreateWave(enemies[0], null, null, enemies[0], enemies[3]);
+
+                // Prepare for the infinite wave - Wave 7
+                // Have at least one enemy ready for the player to fight
+                spawnTimes[0] = 0;
+                break;
+            default:
+                break;
+        }
+    }
+
+    // Loop through the times for each enemy and spawn them when necessary
+    public void ManageInfiniteWave() {
+        for (int i = 0; i < enemies.Length; i++) {
+            if (spawnTimes[i] <= 0) {
+                int spawnPoint = Random.Range(0, spawnPoints.Length - 1);  // Randomize the spawn
+                waveEnemies.Add(Instantiate(enemies[i], spawnPoints[spawnPoint].position, Quaternion.identity));
+
+                spawnTimes[i] = fixedSpawnTimes[i];  // Reset timer
+            } else {
+                spawnTimes[i] -= Time.deltaTime;
             }
-
-            // Determine which wave to spawn
-            switch (waveNumber) {
-                case 1:
-                    //waveEnemies = CreateWave(null, null, null, null, enemies[3]);
-                    waveEnemies = CreateWave(enemies[0], enemies[0], null, null, enemies[0]);
-                    break;
-                case 2:
-                    waveEnemies = CreateWave(enemies[0], enemies[0], enemies[0], enemies[0], enemies[1]);
-                    break;
-                case 3:
-                    waveEnemies = CreateWave(enemies[1], enemies[1], enemies[0], enemies[0], enemies[1]);
-                    break;
-                case 4:
-                    waveEnemies = CreateWave(enemies[1], enemies[1], enemies[1], enemies[1], enemies[2]);
-                    break;
-                case 5:
-                    waveEnemies = CreateWave(enemies[2], enemies[2], enemies[1], enemies[1], enemies[2]);
-                    break;
-                case 6:
-                    waveEnemies = CreateWave(enemies[0], null, null, enemies[0], enemies[3]);
-
-                    // Prepare for the infinite wave - Wave 7
-                    // Have at least one enemy ready for the player to fight
-                    spawnTimes[0] = 0;
-                    break;
-                default:
-                    break;  // Go to wave 7 below
-            }
-        }  // End of if
-
+        }
     }
 
     // Pass in the enemy that should be spawned at each of the spawn points, null otherwise
@@ -132,34 +156,17 @@ public class Spawner : MonoBehaviour {
 
     // When the script is reset
     void OnEnable() {
-        Debug.Log("Spawner enabled");
-        Debug.Log("Wave enemies:");
-        foreach (var enemy in waveEnemies) {
-            Debug.Log(enemy);
-        }
-
         DestroyWave();
         Start();  // Start waves from 0
     }
 
-    /*void OnDisable() {
-        Debug.Log("Spawner disabled");
-        Debug.Log("Wave enemies:");
-        foreach (var enemy in waveEnemies) {
-            Debug.Log(enemy);
-        }
-
-        DestroyWave();
-    }*/
-
     // Destory all alive wave enemies
-    // Note: the list waveEnemies is still unclean and needs to be remade (full of nulls)
+    // Note: the list waveEnemies is still unclean (full of nulls)
     // Start() will clean up this list automatically
     private void DestroyWave() {
         if (waveEnemies != null) {
             foreach (GameObject enemy in waveEnemies)
                 if (enemy) Destroy(enemy);
-            //waveEnemies = new List<GameObject>();
         }
     }
 

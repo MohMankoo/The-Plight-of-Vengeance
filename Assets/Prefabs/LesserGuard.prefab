@@ -337,9 +337,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.100546755}
+  m_Offset: {x: 0, y: 0.15649761}
   serializedVersion: 2
-  m_Radius: 3.8403435
+  m_Radius: 4.3528523
 --- !u!95 &5402421255988075665
 Animator:
   serializedVersion: 3
@@ -376,8 +376,6 @@ MonoBehaviour:
   gun: {fileID: 5402421255174086702}
   enemyIdentifier: 0
   revengeScoreReward: 50
-  repelAmount: 2
-  minimumDistanceFromOther: 2
 --- !u!114 &6248115271523853605
 MonoBehaviour:
   m_ObjectHideFlags: 0

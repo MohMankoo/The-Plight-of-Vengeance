@@ -43,11 +43,12 @@ public class Enemy : Entity {
         // Set animator information
         enemyAnimator.SetBool("isPlayerDead", false);
         enemyAnimator.SetFloat("enemyHealth", this.health);
+        Debug.Log("Setting enemy health to " + this.health);
 
         // Update list of enemies
         enemyIdentifier = currentEnemies.Count + 1;  // Create new key
         currentEnemies.Add(enemyIdentifier, enemy); // Add enemy with associated key (enemyIdentifier)
-        Debug.Log("Enemy created: #" + enemyIdentifier + " | Total: " + currentEnemies.Count);
+        // Debug.Log("Enemy created: #" + enemyIdentifier + " | Total: " + currentEnemies.Count);
     }
 
     public void OnEnemyUpdate() {
@@ -105,6 +106,7 @@ public class Enemy : Entity {
             gun.Jarr(true);
 
             // Initiate death animation
+            Debug.Log("Changing enemy health to " + health);
             enemyAnimator.SetFloat("enemyHealth", health);
 
             // Craete revenge score label
@@ -114,7 +116,7 @@ public class Enemy : Entity {
             // Last-minute funtionality
             player.revengeScore += revengeScoreReward;  // Award Player
             bool removedSuccessfuly = currentEnemies.Remove(this.enemyIdentifier);  // Remove from list of alive enemies
-            Debug.Log("Enemy was removed: " + removedSuccessfuly);
+            // Debug.Log("Enemy was removed: " + removedSuccessfuly);
 
             Destroy(gameObject, 2);
         }
@@ -122,7 +124,7 @@ public class Enemy : Entity {
 
     private void OnDestroy() {
         bool removedSuccessfuly = currentEnemies.Remove(this.enemyIdentifier);  // Remove from list of alive enemies
-        Debug.Log("Enemy was removed: " + removedSuccessfuly);
+        // Debug.Log("Enemy was removed: " + removedSuccessfuly);
     }
 
     public void RepelOtherEnemies() {
