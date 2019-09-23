@@ -9,9 +9,13 @@ public class EntityPopupCreator : MonoBehaviour {
     public static float shopDestroyTime = 1.2f;
 
     public void CreateDamageText(Transform entity, int damage) {
+        CreateDamageText(entity, damage.ToString());
+    }
+
+    public void CreateDamageText(Transform entity, string damage) {
         Text damageText = CreateTemporaryText(entity, "EntityCanvas");
-        damageText.text = damage.ToString();
-        
+        damageText.text = damage;
+
         Destroy(damageText, destroyTime);
     }
 

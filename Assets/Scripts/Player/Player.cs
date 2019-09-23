@@ -27,6 +27,9 @@ public class Player : Entity {
     [Header("Visual effects")]
     public CameraShake cameraShake;
 
+    // Other
+    private string blockedFeedback = "BLOCK";
+
     private void Start() {
         // Initialize properties
         playerRB = GetComponent<Rigidbody2D>();
@@ -175,10 +178,14 @@ public class Player : Entity {
 
         // Take damage only if alive
         if (colliderTag.Equals("EnemyProjectile") && !IsDead()) {
-            int damageDone = collider.GetComponent<Bullet>().attackPower;
-            entityPopup.CreateDamageText(transform, damageDone);
+            if (!isInvincible) {
+                int damageDone = collider.GetComponent<Bullet>().attackPower;
+                entityPopup.CreateDamageText(transform, damageDone);
+                DepleteHealth(damageDone);
+            } else {
+                entityPopup.CreateDamageText(transform, blockedFeedback);
+            }
 
-            DepleteHealth(damageDone);
             Destroy(collider.gameObject);
         }
     }
