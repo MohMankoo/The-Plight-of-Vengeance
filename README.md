@@ -19,8 +19,9 @@ Unfortunately (or perhaps fortunately), you find that each time you die, you com
 * `W` `A` `S` `D` to move the character around the environment
 * Mouse to rotate the character to face in the desired direction
 * `Left click` to shoot
+* `Space` to dash (once unlocked)
 
 ## Credits
-* All fonts were obtained from [dafont](https://www.dafont.com/ dafont)
+* All fonts were obtained from [dafont](https://www.dafont.com/)
 * Everything else is made from scratch
 
