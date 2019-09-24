@@ -1,7 +1,7 @@
 # The-Plight-of-Vengeance
 #### A top-down shooter with roguelike elements 
 
-![Game logo](/Assets/Sprites/Logo.png)
+![Game logo](/Assets/Sprites/Logo-reverse.png)
 
 Made for **Ludum Dare 44.**
 **Theme:** Your life is currency
