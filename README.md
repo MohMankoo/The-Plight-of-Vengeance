@@ -2,9 +2,9 @@
 
 ![Game logo](/Assets/Sprites/Intro/TitleScreenCropped.png)
 
-## A top-down shooter with roguelike elements.
-
+A top-down shooter with roguelike elements.
 Made for **Ludum Dare 44.**
+
 **Theme:** Your life is currency
 
 ## Background
