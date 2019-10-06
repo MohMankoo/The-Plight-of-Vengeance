@@ -8,7 +8,7 @@ Made for **Ludum Dare 44.**
 **Theme:** Your life is currency
 
 ## Background
-You play an unnamed man who has sworn revenge against the agents of the government for recklessly killng his wife and mother during a Proletariat riot.
+You play an unnamed man who has sworn revenge against the agents of the government for recklessly killng his wife during a Proletariat riot.
 Unfortunately (or perhaps fortunately), you find that each time you die, you come back to life to the point in time preceding your murder spree, creating a vicious cycle of vengeance that leads nowhere.
 
 ## Features
