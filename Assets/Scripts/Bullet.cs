@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour {
                             GameObject shooter) {
 
         // Randomize attack power to +/- of the provided attackPower
-        int attackPowerOffset = Random.Range(-5, 5);
+        int attackPowerOffset = Random.Range(-5, 6);
         this.attackPower = attackPower + attackPowerOffset;
 
         // Minimum value of 1 for attacks

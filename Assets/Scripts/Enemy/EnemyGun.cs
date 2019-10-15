@@ -30,6 +30,7 @@ public class EnemyGun : Gun {
             if (cooldownTillNextShot <= 0) {
                 Shoot(enemyUser, bullet);
                 enemyGunAnimator.SetTrigger("gunFired");
+                AudioManager.PlayEnemyGunSound(this.enemyUser.tag);
 
                 cooldownTillNextShot = fixedCooldownTillNextShot;  // Reset cooldown
 

@@ -26,14 +26,14 @@ public class UpgradesManager : MonoBehaviour {
 
     [Header("Misc")]
     public MouseCursor mouseCursorHandler;
-    private EntityPopupCreator revengeCostGraphics;
+    private EntityPopupCreator popupCreator;
 
     private string insufficientFunds = "Your revenge is lacking";
     private string atMaxPower = "Your skill is unmatchable";
 
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        revengeCostGraphics = GetComponent<EntityPopupCreator>();
+        popupCreator = GetComponent<EntityPopupCreator>();
 
         // Initialize upgrade levels
         healthUpgradeLevel = 0;
@@ -57,7 +57,7 @@ public class UpgradesManager : MonoBehaviour {
                 upgradeLevels.Add(child.GetComponent<Text>());
         }
 
-        // Get a reference to the BUY button clicked among other variables
+        // Get a reference to the BUY button clicked, among other variables
         GameObject upgradeButton = upgradePanel.GetComponentInChildren<Button>().gameObject;
         string upgradePath = upgradeButton.tag;  // Health, speed, gun, power, etc.
         int playerRevengeBeforeUpgrade = player.revengeScore;
@@ -69,50 +69,70 @@ public class UpgradesManager : MonoBehaviour {
                 int upgradeToAttempt = healthUpgradeLevel + 1;
 
                 if (AddHealthUpgrade(upgradeToAttempt)) {
-                    ShowBuyingFeedback(upgradeButton, upgradeLevels, playerRevengeBeforeUpgrade, upgradeToAttempt);
+                    ShowBuyingFeedback(upgradeButton, upgradeLevels,
+                        playerRevengeBeforeUpgrade, upgradeToAttempt);
                 } else {
-                    revengeCostGraphics.CreateNegativeRevengeText(upgradeButton.transform, insufficientFunds);
+                    popupCreator.CreateShopFeedback(
+                        upgradeButton.transform, insufficientFunds, false);
                 }
-            }  else { revengeCostGraphics.CreateNegativeRevengeText(upgradeButton.transform, atMaxPower); }
+            }  else { 
+                popupCreator.CreateShopFeedback(
+                    upgradeButton.transform, atMaxPower, false); 
+            }
         } else if (upgradePath.Equals("SpeedUpgrade")) {
             if (speedUpgradeLevel < 3) {
                 int upgradeToAttempt = speedUpgradeLevel + 1;
 
                 if (AddSpeedUpgrade(upgradeToAttempt)) {
-                    ShowBuyingFeedback(upgradeButton, upgradeLevels, playerRevengeBeforeUpgrade, upgradeToAttempt);
+                    ShowBuyingFeedback(upgradeButton, upgradeLevels,
+                        playerRevengeBeforeUpgrade, upgradeToAttempt);
                 } else {
-                    revengeCostGraphics.CreateNegativeRevengeText(upgradeButton.transform, insufficientFunds);
+                    popupCreator.CreateShopFeedback(
+                        upgradeButton.transform, insufficientFunds, false);
                 }
-            } else { revengeCostGraphics.CreateNegativeRevengeText(upgradeButton.transform, atMaxPower); }
+            } else {
+                popupCreator.CreateShopFeedback(
+                    upgradeButton.transform, atMaxPower, false);
+            }
         } else if (upgradePath.Equals("AttackPowerUpgrade")) {
             if (attackPowerUpgradeLevel < 3) {
                 int upgradeToAttempt = attackPowerUpgradeLevel + 1;
 
                 if (AddAttackPwrUpgrade(upgradeToAttempt)) {
-                    ShowBuyingFeedback(upgradeButton, upgradeLevels, playerRevengeBeforeUpgrade, upgradeToAttempt);
+                    ShowBuyingFeedback(upgradeButton, upgradeLevels,
+                        playerRevengeBeforeUpgrade, upgradeToAttempt);
                 } else {
-                    revengeCostGraphics.CreateNegativeRevengeText(upgradeButton.transform, insufficientFunds);
+                    popupCreator.CreateShopFeedback(
+                        upgradeButton.transform, insufficientFunds, false);
                 }
-            } else { revengeCostGraphics.CreateNegativeRevengeText(upgradeButton.transform, atMaxPower); }
+            } else {
+                popupCreator.CreateShopFeedback(
+                    upgradeButton.transform, atMaxPower, false);
+            }
         } else {  // Gun upgrade
             if (gunUpgradeLevel < 2) {
                 int upgradeToAttempt = gunUpgradeLevel + 1;
 
                 if (AddGunUpgrade(upgradeToAttempt)) {
-                    ShowBuyingFeedback(upgradeButton, upgradeLevels, playerRevengeBeforeUpgrade, upgradeToAttempt);
+                    ShowBuyingFeedback(upgradeButton, upgradeLevels,
+                        playerRevengeBeforeUpgrade, upgradeToAttempt);
                 } else {
-                    revengeCostGraphics.CreateNegativeRevengeText(upgradeButton.transform, insufficientFunds);
+                    popupCreator.CreateShopFeedback(
+                        upgradeButton.transform, insufficientFunds, false);
                 }
-            } else { revengeCostGraphics.CreateNegativeRevengeText(upgradeButton.transform, atMaxPower); }
+            } else {
+                popupCreator.CreateShopFeedback(
+                    upgradeButton.transform, atMaxPower, false);
+            }
         }
     }
 
-    private void ShowBuyingFeedback(GameObject upgradeButton, List<Text> upgradeLevels,
+    private void ShowBuyingFeedback (GameObject upgradeButton, List<Text> upgradeLevels,
                                     int playerRevengeBeforeUpgrade, int upgradeBought) {
         // Show visual success feedback
         int revengeScoreLost = playerRevengeBeforeUpgrade - player.revengeScore;
-        revengeCostGraphics.CreateNegativeRevengeText(
-            upgradeButton.transform, "-" + revengeScoreLost);
+        popupCreator.CreateShopFeedback(
+            upgradeButton.transform, "-" + revengeScoreLost, true);
 
         // Paint the recently bought upgrade GREEN
         int upgradeTextIndex = upgradeBought - 1;

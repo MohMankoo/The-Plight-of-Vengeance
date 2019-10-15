@@ -25,9 +25,11 @@ public class PlayerHealth : MonoBehaviour {
 
         // Colour text to show feedback on low health
         if (newHealth / player.maxHealth <= 0.25f) {  // Lower than 25% of health
-            currentHealth.color = new Color(210f, 39f, 39f);
+            Debug.Log("setting color 25%");
+            currentHealth.color = new Color(210f, 39f, 39f, 1f);
         } else if (newHealth / player.maxHealth <= 0.5f) {  // Lower than 50% of health
-            currentHealth.color = new Color(255f, 198f, 0f);
+            Debug.Log("setting color 50%");
+            currentHealth.color = new Color(255f, 198f, 0f, 1f);
         }
     }
 

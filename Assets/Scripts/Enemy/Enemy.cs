@@ -56,7 +56,7 @@ public class Enemy : Entity {
         if (!player)  // If Player is null
             return;
 
-        KillIfHealthDepleted();
+        StopFunctionalityOnDeath();
 
         // Stop functionality if player is dead
         if (player.IsDead()) {
@@ -97,19 +97,21 @@ public class Enemy : Entity {
         transform.rotation = Quaternion.Lerp(transform.rotation, turnRotation, turnSpeed * Time.deltaTime);
     }
 
-    public void KillIfHealthDepleted() {
+    public void StopFunctionalityOnDeath() {
         // If not already dead and should be, kill
         if (IsDead()) {
             // Stop enemy movement
             StopMovement(true);
             gun.Jarr(true);
 
-            // Initiate death animation
+            // Initiate death animation and sound feedback
             enemyAnimator.SetFloat("enemyHealth", health);
+            AudioManager.PlayVoice("enemy");
 
-            // Craete revenge score label
+            // Craete revenge score label and sound feedback
             entityPopup.CreateRevengeScoreText(
                 transform, revengeScoreReward);
+            AudioManager.PlayEffect("expGain");
 
             // Last-minute funtionality
             player.revengeScore += revengeScoreReward;  // Award Player
@@ -154,11 +156,11 @@ public class Enemy : Entity {
 
         if (colliderTag.Equals("Player")) {
             player.DepleteHealth(player.maxHealth);  // Instantly kill player
-
         } else if (colliderTag.Equals("PlayerProjectile")) {
             // Damage self and destroy projectile
             int damageDone = collider.GetComponent<Bullet>().attackPower;
             entityPopup.CreateDamageText(transform, damageDone);
+            AudioManager.PlayHitSound();
 
             DepleteHealth(damageDone);
             Destroy(collider.gameObject);

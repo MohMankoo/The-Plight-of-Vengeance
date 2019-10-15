@@ -28,11 +28,10 @@ public class PlayerGun : Gun {
 
         // Shoot the gun only if cooldown has finished
         if (cooldownTillNextShot <= 0) {
-            if (Input.GetMouseButtonDown(0)) 
-            {
+            if (Input.GetMouseButtonDown(0)) {
                 Shoot(player, bullet);
                 gunAnimator.SetTrigger("gunFired");
-                //cameraShake.TriggerShaking(0.05f, 0.04f);
+                AudioManager.PlayPlayerGunSound(this.tag);
 
                 cooldownTillNextShot = fixedCooldownTillNextShot;  // Reset cooldown
             }

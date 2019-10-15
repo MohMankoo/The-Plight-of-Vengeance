@@ -29,12 +29,16 @@ public class Player : Entity {
 
     // Other
     private string blockedFeedback = "BLOCK";
+    private bool allFunctionalityStopped;
 
     private void Start() {
         // Initialize properties
         playerRB = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
         entityPopup = GetComponent<EntityPopupCreator>();
+
+        // General functionality
+        allFunctionalityStopped = false;
 
         // Dashing
         canDash = false;
@@ -57,7 +61,7 @@ public class Player : Entity {
 
     // Even though movement is not physics-related, put it in FixedUpdate()
     private void FixedUpdate() {
-        if (movementStopped) return;
+        if (movementStopped || allFunctionalityStopped) return;
         MovePlayer();
 
         // Change direction if mouse is within window
@@ -76,17 +80,20 @@ public class Player : Entity {
     }
 
     private void Update() {
-        KillIfHealthDepleted();
+        if (!allFunctionalityStopped)
+            StopFunctionalityOnDeath();
     }
 
     // Health
 
-    private void KillIfHealthDepleted() {
+    private void StopFunctionalityOnDeath() {
         // Check if player should be dead
         if (IsDead() && !isInvincible) {
             StopMovement(true);
             gun.Jarr(true);
+            allFunctionalityStopped = true;
 
+            AudioManager.PlayVoice("player");
             playerHealthDisplay.UpdateCurrentHealth(health);
             playerAnimator.SetFloat("PlayerHealth", health);
         }
@@ -147,8 +154,10 @@ public class Player : Entity {
     }
 
     IEnumerator Dash(Vector2 direction) {
-        cameraShake.TriggerShaking(0.2f, 0.1f);  // Shake camera for effect
-
+        // Shake camera for effect and add sound
+        cameraShake.TriggerShaking(0.2f, 0.1f);
+        AudioManager.PlayEffect("dash");
+        
         float dashLength = 0.8f;
         while (dashLength > 0) {
             playerRB.MovePosition(playerRB.position + (direction * dashIntensity));
@@ -180,7 +189,9 @@ public class Player : Entity {
         if (colliderTag.Equals("EnemyProjectile") && !IsDead()) {
             if (!isInvincible) {
                 int damageDone = collider.GetComponent<Bullet>().attackPower;
+
                 entityPopup.CreateDamageText(transform, damageDone);
+                AudioManager.PlayHitSound();
                 DepleteHealth(damageDone);
             } else {
                 entityPopup.CreateDamageText(transform, blockedFeedback);
@@ -200,6 +211,10 @@ public class Player : Entity {
 
     public void SetCanDash(bool canDash) {
         this.canDash = canDash;
+    }
+
+    public void SetFullFunctionalityIndicator() {
+        this.allFunctionalityStopped = false;
     }
 
 }

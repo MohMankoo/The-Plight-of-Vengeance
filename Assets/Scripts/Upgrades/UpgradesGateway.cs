@@ -55,6 +55,7 @@ public class UpgradesGateway : MonoBehaviour {
         player.transform.position = GameManager.defaultPlayerPos;
         player.transform.rotation = GameManager.defaultPlayerRotation;
 
+        player.SetFullFunctionalityIndicator();
         player.StopMovement(false);
         player.gun.Jarr(false);
         playerHealthDisplay.ResetDisplayColours();
@@ -82,6 +83,8 @@ public class UpgradesGateway : MonoBehaviour {
         GameObject revivedDisplayMsg =
                     Instantiate(revivedDisplay, gameHUD.transform.position, Quaternion.identity);
         revivedDisplayMsg.transform.SetParent(gameHUD.transform);
+
+        AudioManager.PlayEffect("revival");
         Destroy(revivedDisplayMsg, 1.2f);
 
         // Set animator information
@@ -100,14 +103,21 @@ public class UpgradesGateway : MonoBehaviour {
 
         // Spawner - wait a bit so enemies do not awkwardly disappear.
         yield return new WaitForSeconds(0.2f);
-        if (enteringUpgrades)
+        if (enteringUpgrades) {
+            AudioManager.SwitchOST("CalmBeforeTheStorm");
             spawner.SetActive(false);
-        else
+        } else {
+            AudioManager.SwitchOST("EnteringBattle");
             spawner.SetActive(true);
+        }
 
-        // Toggle visibility
+        // Toggle visibility and switch OST
         yield return new WaitForSeconds(0.85f);
-        upgradesCanvas.gameObject.SetActive(enteringUpgrades);
+        if (enteringUpgrades) {
+            upgradesCanvas.gameObject.SetActive(true);
+        } else {
+            upgradesCanvas.gameObject.SetActive(false);
+        }
 
         // Trigger animation for entering Upgrades AFTER Upgrades panel has been re-activated.
         // to prevent buggy behaviour

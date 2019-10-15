@@ -33,10 +33,16 @@ public class EntityPopupCreator : MonoBehaviour {
         Destroy(revengeScoreText, destroyTime);
     }
 
-    // Create a text popup meant to portray negativity.
+    // Create shop feedback text
     // For Upgrade button in Upgrades shop. Used by UpgradesManager.
-    public void CreateNegativeRevengeText(Transform upgradeButton, string feedbackText) {
+    public void CreateShopFeedback(Transform upgradeButton, string feedbackText, bool isSuccess) {
         Text revengeCostText = CreateTemporaryText(upgradeButton, "");  // Canvas tag not needed
+
+        // Play audio
+        if (isSuccess)
+            AudioManager.PlayEffect("upgradeSuccess");
+        else
+            AudioManager.PlayEffect("upgradeFail");
 
         // Change text formatting
         revengeCostText.fontSize = 85;

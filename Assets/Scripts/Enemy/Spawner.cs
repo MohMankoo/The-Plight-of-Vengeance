@@ -8,7 +8,7 @@ public class Spawner : MonoBehaviour {
 
     [Header("Round Display Information")]
     public Canvas gameHUD;
-    public GameObject rouncCompleteDisplay;
+    public GameObject roundCompleteDisplay;
 
     // The indices of the enemies correspond to the indices of fixedSpawnTimes
     // So, enemies[i]'s spawn time = fixedSpawnTimes[i]
@@ -27,6 +27,7 @@ public class Spawner : MonoBehaviour {
     private int waveNumber;
     private bool lastWaveClear;
     private bool inTransitionMode;
+    private bool onWave7;
 
     private void Start() {
         // Initialize spawn time values
@@ -40,13 +41,20 @@ public class Spawner : MonoBehaviour {
         waveNumber = 0;
         lastWaveClear = true;
         inTransitionMode = false;
+        onWave7 = false;
         waveEnemies = new List<GameObject>();
     }
 
     private void Update() {
-        // Focus on infinite wave if on wave 7
-        if (waveNumber == 7) {
+        if (onWave7) {
             ManageInfiniteWave();
+            return;
+        }
+        
+        // Switch to Wave 7 mode (infinite wave) if waveNumber is 7
+        if (waveNumber == 7) {
+            AudioManager.SwitchOST("EnteringBattle");
+            onWave7 = true;
         }
 
         // Create waves once previous wave enemies are dead
@@ -62,14 +70,16 @@ public class Spawner : MonoBehaviour {
 
         if (waveNumber > 1) {
             // Display Round Complete message for its duration of 1.2f
-            GameObject roundCompleteMsg =
-            Instantiate(rouncCompleteDisplay, gameHUD.transform.position, Quaternion.identity);
+            GameObject roundCompleteMsg = 
+                Instantiate(roundCompleteDisplay, gameHUD.transform.position, Quaternion.identity);
             roundCompleteMsg.transform.SetParent(gameHUD.transform);
+
+            AudioManager.PlayEffect("culmination");
             Destroy(roundCompleteMsg, 1.2f);
 
             // Wait a bit before starting next round if it is not the first wave
             inTransitionMode = true;
-            StartCoroutine(player.MakeInvincible(1.5f));
+            StartCoroutine(player.MakeInvincible(2f));
             yield return new WaitForSeconds(1f);
             inTransitionMode = false;
         }
@@ -89,16 +99,17 @@ public class Spawner : MonoBehaviour {
                 waveEnemies = CreateWave(enemies[0], enemies[0], enemies[0], enemies[0], enemies[1]);
                 break;
             case 3:
-                waveEnemies = CreateWave(enemies[1], enemies[1], enemies[0], enemies[0], enemies[1]);
+                waveEnemies = CreateWave(enemies[1], enemies[1], enemies[0], enemies[0], enemies[0]);
                 break;
             case 4:
-                waveEnemies = CreateWave(enemies[1], enemies[1], enemies[1], enemies[1], enemies[2]);
+                waveEnemies = CreateWave(enemies[1], enemies[1], enemies[0], enemies[0], enemies[2]);
                 break;
             case 5:
-                waveEnemies = CreateWave(enemies[2], enemies[2], enemies[1], enemies[1], enemies[2]);
+                waveEnemies = CreateWave(enemies[2], enemies[2], enemies[0], enemies[0], enemies[1]);
                 break;
             case 6:
-                waveEnemies = CreateWave(enemies[0], null, null, enemies[0], enemies[3]);
+                AudioManager.SwitchOST("FaceOff");
+                waveEnemies = CreateWave(null, null, null, null, enemies[3]);
 
                 // Prepare for the infinite wave - Wave 7
                 // Have at least one enemy ready for the player to fight
@@ -113,7 +124,7 @@ public class Spawner : MonoBehaviour {
     public void ManageInfiniteWave() {
         for (int i = 0; i < enemies.Length; i++) {
             if (spawnTimes[i] <= 0) {
-                int spawnPoint = Random.Range(0, spawnPoints.Length - 1);  // Randomize the spawn
+                int spawnPoint = Random.Range(0, spawnPoints.Length);  // Randomize the spawn
                 waveEnemies.Add(Instantiate(enemies[i], spawnPoints[spawnPoint].position, Quaternion.identity));
 
                 spawnTimes[i] = fixedSpawnTimes[i];  // Reset timer
