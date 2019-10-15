@@ -286,7 +286,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'UPGRADE 3: 999 Health (3000)'
+  m_Text: 'UPGRADE 3: 999 Health (1500)'
 --- !u!222 &31707393
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -820,7 +820,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'UPGRADE 3: 30 Attack (3000)'
+  m_Text: 'UPGRADE 3: 33 Attack (1500)'
 --- !u!222 &197308110
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1319,7 +1319,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'UPGRADE 1: 250 Health (500)'
+  m_Text: 'UPGRADE 1: 200 Health (250)'
 --- !u!222 &324541218
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3125,7 +3125,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'UPGRADE 3: 70 Speed (3000)'
+  m_Text: 'UPGRADE 3: 70 Speed (1250)'
 --- !u!222 &694118398
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3223,7 +3223,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'UPGRADE 1: 20 Attack (500)'
+  m_Text: 'UPGRADE 1: 20 Attack (300)'
 --- !u!222 &699585324
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3551,7 +3551,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'UPGRADE 2: Dash Unlock (1750)'
+  m_Text: 'UPGRADE 2: Dash Unlock (850)'
 --- !u!222 &742826789
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3874,7 +3874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: dbddb27875ca60a478bf9c92b89fab7e, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -4221,7 +4221,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'UPGRADE 1: X-Gun (1000)'
+  m_Text: 'UPGRADE 1: X-Gun (650)'
 --- !u!222 &915658685
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5146,7 +5146,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'UPGRADE 1: 55 Speed (500)'
+  m_Text: 'UPGRADE 1: 55 Speed (250)'
 --- !u!222 &1146525957
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5645,7 +5645,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'UPGRADE 2: 500 Health (1500)'
+  m_Text: 'UPGRADE 2: 500 Health (750)'
 --- !u!222 &1340982569
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7103,6 +7103,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1805414013297916370, guid: 0cbc1ea5fe35e6346a9e2538cf62037b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5390053548341847977, guid: 0cbc1ea5fe35e6346a9e2538cf62037b,
         type: 3}
       propertyPath: m_Name
@@ -8208,11 +8213,6 @@ PrefabInstance:
       propertyPath: enemyGuns.Array.data[15].pitch
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1805414013297916370, guid: 0cbc1ea5fe35e6346a9e2538cf62037b,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0cbc1ea5fe35e6346a9e2538cf62037b, type: 3}
 --- !u!1 &1783112112
@@ -8304,7 +8304,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'UPGRADE 2: 25 Attack (1500)'
+  m_Text: 'UPGRADE 2: 27 Attack (800)'
 --- !u!222 &1783112116
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8843,7 +8843,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'UPGRADE 2: V-Gun (3000)'
+  m_Text: 'UPGRADE 2: V-Gun (1750)'
 --- !u!222 &1972411986
 CanvasRenderer:
   m_ObjectHideFlags: 0

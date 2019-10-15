@@ -49,31 +49,31 @@ public class EnemyGun : Gun {
 
         if (tag.Equals("LesserGuard")) {
             tag = "LesserGuard";
-            attackPower = 100;
+            attackPower = 33;
             projectileSizeFactor = 0.7f;
             projectileSpeed = 2f;
             fixedCooldownTillNextShot = 2.5f;
 
         } else if (tag.Equals("Guard")) {
             tag = "Guard";
-            attackPower = 12;
+            attackPower = 10;
             projectileSizeFactor = 0.7f;
             projectileSpeed = 2f;
             fixedCooldownTillNextShot = 0.2f;
 
         } else if (tag.Equals("SuperiorGuard")) {
             tag = "SuperiorGuard";
-            attackPower = 250;
+            attackPower = 333;
             projectileSizeFactor = 2f;
             projectileSpeed = 8;
             fixedCooldownTillNextShot = 2.5f;
 
         } else {  // Commander
             tag = "Commander";
-            attackPower = 999;
-            projectileSizeFactor = 3f;
+            attackPower = 1000;
+            projectileSizeFactor = 3.5f;
             projectileSpeed = 15;
-            fixedCooldownTillNextShot = 3f;
+            fixedCooldownTillNextShot = 1.75f;
         }
 
         // Make changes take effect

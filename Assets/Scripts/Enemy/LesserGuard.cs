@@ -4,7 +4,7 @@ public class LesserGuard : Enemy {
 
     private void Start() {
         // Update enemy information
-        InitializeEnemy(this, 70, 50, 0.8f, 10f);
+        InitializeEnemy(this, 70, 50, 1f, 10f);
         gun.UpdateEnemyGun(gameObject);  // tag = type of enemy
 
         // Setup animator information

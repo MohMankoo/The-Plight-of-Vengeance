@@ -4,7 +4,7 @@ public class Guard : Enemy {
 
     private void Start() {
         // Update enemy information
-        InitializeEnemy(this, 175, 150, 1.2f, 15f);
+        InitializeEnemy(this, 175, 150, 0.5f, 15f);
         gun.UpdateEnemyGun(gameObject);  // tag = type of enemy
 
         // Setup animator information

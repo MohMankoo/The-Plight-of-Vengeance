@@ -4,7 +4,7 @@ public class Commander : Enemy {
 
     private void Start() {
         // Update enemy information
-        InitializeEnemy(this, 999, 2000, 1.1f, 20f);
+        InitializeEnemy(this, 999, 2000, 1.35f, 20f);
         gun.UpdateEnemyGun(gameObject);  // tag = type of enemy
 
         // Setup animator information

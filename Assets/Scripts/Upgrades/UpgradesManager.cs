@@ -140,10 +140,10 @@ public class UpgradesManager : MonoBehaviour {
     }
 
     public bool AddHealthUpgrade(int level) {
-        if (level == 1  && player.revengeScore >= 500) {
-            player.SetMaxHealth(250);
+        if (level == 1  && player.revengeScore >= 250) {
+            player.SetMaxHealth(200);
 
-            player.revengeScore -= 500;
+            player.revengeScore -= 250;
             healthUpgradeLevel++;
 
             // Update the sprite to the sprite of the next level available (if possible)
@@ -151,19 +151,19 @@ public class UpgradesManager : MonoBehaviour {
             healthSprite.color = new Color32(255, 255, 255, 255); // Make sprite visible upon first upgrade
             return true;
 
-        } else if (level == 2 && player.revengeScore >= 1500) {
+        } else if (level == 2 && player.revengeScore >= 750) {
             player.SetMaxHealth(500);
 
-            player.revengeScore -= 1500;
+            player.revengeScore -= 750;
             healthUpgradeLevel++;
 
             healthSprite.sprite = Resources.Load<Sprite>("Upgrades/HealthUpgrade" + healthUpgradeLevel);
             return true;
 
-        } else if (level == 3 && player.revengeScore >= 3000) { // Level 3
+        } else if (level == 3 && player.revengeScore >= 1500) { // Level 3
             player.SetMaxHealth(999);
 
-            player.revengeScore -= 3000;
+            player.revengeScore -= 1500;
             healthUpgradeLevel++;
 
             healthSprite.sprite = Resources.Load<Sprite>("Upgrades/HealthUpgrade" + healthUpgradeLevel);
@@ -174,11 +174,11 @@ public class UpgradesManager : MonoBehaviour {
     }
 
     public bool AddSpeedUpgrade(int level) {
-        if (level == 1 && player.revengeScore >= 500) {
+        if (level == 1 && player.revengeScore >= 250) {
             player.SetSpeed(5.5f);
             player.SetTurnSpeed(20);
 
-            player.revengeScore -= 500;
+            player.revengeScore -= 250;
             speedUpgradeLevel++;
 
             // Update the sprite to the sprite of the next level available (if possible)
@@ -186,20 +186,20 @@ public class UpgradesManager : MonoBehaviour {
             speedSprite.color = new Color32(255, 255, 255, 255); // Make sprite visible upon first upgrade
             return true;
 
-        } else if (level == 2 && player.revengeScore >= 1750) {
+        } else if (level == 2 && player.revengeScore >= 850) {
             player.SetCanDash(true);
 
-            player.revengeScore -= 1750;
+            player.revengeScore -= 850;
             speedUpgradeLevel++;
 
             speedSprite.sprite = Resources.Load<Sprite>("Upgrades/SpeedUpgrade" + speedUpgradeLevel);
             return true;
 
-        } else if (level == 3 && player.revengeScore >= 3000) { // Level 3
+        } else if (level == 3 && player.revengeScore >= 1250) { // Level 3
             player.SetSpeed(7f);
             player.SetTurnSpeed(30);
 
-            player.revengeScore -= 3000;
+            player.revengeScore -= 1250;
             speedUpgradeLevel++;
 
             speedSprite.sprite = Resources.Load<Sprite>("Upgrades/SpeedUpgrade" + speedUpgradeLevel);
@@ -210,10 +210,10 @@ public class UpgradesManager : MonoBehaviour {
     }
 
     public bool AddAttackPwrUpgrade(int level) {
-        if (level == 1 && player.revengeScore >= 500) {
+        if (level == 1 && player.revengeScore >= 300) {
             player.UpgradeAttackPwr(5);
 
-            player.revengeScore -= 500;
+            player.revengeScore -= 300;
             attackPowerUpgradeLevel++;
 
             attackPwrSprite.sprite = Resources.Load<Sprite>("Upgrades/DamageUpgrade" + attackPowerUpgradeLevel);
@@ -223,20 +223,20 @@ public class UpgradesManager : MonoBehaviour {
             player.gun.UpdateGun(player.projectileAttkPwrBonus);
             return true;
 
-        } else if (level == 2 && player.revengeScore >= 1500) {
-            player.UpgradeAttackPwr(10);
+        } else if (level == 2 && player.revengeScore >= 800) {
+            player.UpgradeAttackPwr(12);
 
-            player.revengeScore -= 1500;
+            player.revengeScore -= 800;
             attackPowerUpgradeLevel++;
 
             attackPwrSprite.sprite = Resources.Load<Sprite>("Upgrades/DamageUpgrade" + attackPowerUpgradeLevel);
             player.gun.UpdateGun(player.projectileAttkPwrBonus);
             return true;
 
-        } else if (level == 3 && player.revengeScore >= 3000) { // Level 3
-            player.UpgradeAttackPwr(15);
+        } else if (level == 3 && player.revengeScore >= 1500) { // Level 3
+            player.UpgradeAttackPwr(18);
 
-            player.revengeScore -= 3000;
+            player.revengeScore -= 1500;
             attackPowerUpgradeLevel++;
 
             attackPwrSprite.sprite = Resources.Load<Sprite>("Upgrades/DamageUpgrade" + attackPowerUpgradeLevel);
@@ -248,10 +248,10 @@ public class UpgradesManager : MonoBehaviour {
     }
     
     public bool AddGunUpgrade(int level) {
-        if (level == 1 && player.revengeScore >= 1000) {  // X-Gun
+        if (level == 1 && player.revengeScore >= 650) {  // X-Gun
             player.gun.UpdateGun("X-Gun", player.projectileAttkPwrBonus);
 
-            player.revengeScore -= 1000;
+            player.revengeScore -= 650;
             gunUpgradeLevel++;
 
             // Change gun sprite and cursor
@@ -259,10 +259,10 @@ public class UpgradesManager : MonoBehaviour {
             mouseCursorHandler.ChangeGameCursorType("X-Gun");
             return true;
 
-        } else if (level == 2 && player.revengeScore >= 3000) {  // V-Gun
+        } else if (level == 2 && player.revengeScore >= 1750) {  // V-Gun
             player.gun.UpdateGun("V-Gun", player.projectileAttkPwrBonus);
 
-            player.revengeScore -= 3000;
+            player.revengeScore -= 1750;
             gunUpgradeLevel++;
 
             // Change gun sprite and cursor

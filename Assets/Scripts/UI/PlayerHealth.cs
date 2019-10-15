@@ -24,11 +24,11 @@ public class PlayerHealth : MonoBehaviour {
         currentHealth.text = newHealth.ToString();
 
         // Colour text to show feedback on low health
-        if (newHealth / player.maxHealth <= 0.25f) {  // Lower than 25% of health
-            Debug.Log("setting color 25%");
+        float healthPercentage = (float)newHealth / (float)player.maxHealth;
+        if (healthPercentage <= 0.3f) {  // Lower than 25% of health
+            Debug.Log("Math: " + newHealth + "/" + player.maxHealth + " = " + healthPercentage);
             currentHealth.color = new Color32(210, 39, 39, 255);
-        } else if (newHealth / player.maxHealth <= 0.5f) {  // Lower than 50% of health
-            Debug.Log("setting color 50%");
+        } else if (healthPercentage <= 0.6f) {  // Lower than 50% of health
             currentHealth.color = new Color32(255, 198, 0, 255);
         }
     }
