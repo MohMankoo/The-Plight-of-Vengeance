@@ -5,7 +5,7 @@ public class SuperiorGuard : Enemy {
 
     private void Start() {
         // Update enemy information
-        InitializeEnemy(this, 250, 300, 1.5f, 20f);
+        InitializeEnemy(this, 250, 300, 0.8f, 20f);
         gun.UpdateEnemyGun(gameObject);  // tag = type of enemy
 
         // Setup animator information
