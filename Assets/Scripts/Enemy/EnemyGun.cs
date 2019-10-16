@@ -70,7 +70,7 @@ public class EnemyGun : Gun {
 
         } else {  // Commander
             tag = "Commander";
-            attackPower = 1000;
+            attackPower = 500;
             projectileSizeFactor = 3.5f;
             projectileSpeed = 15;
             fixedCooldownTillNextShot = 1.75f;
