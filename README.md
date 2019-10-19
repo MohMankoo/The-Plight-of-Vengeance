@@ -2,19 +2,20 @@
 
 ![Game logo](/Assets/Sprites/Intro/TitleScreenCropped.png)
 
-A top-down shooter with roguelike elements.
-Made for **Ludum Dare 44.**
+**PLAY GAME**: [The Plight of Vengeance](https://mohmankoo.itch.io/the-plight-of-vengeance)
 
-**Theme:** Your life is currency
+Recommended use with monitors that can support a resolution of at least 1300x650
 
 ## Background
-You play an unnamed man who has sworn revenge against the agents of the government for recklessly killng his wife during a Proletariat riot.
-Unfortunately (or perhaps fortunately), you find that each time you die, you come back to life to the point in time preceding your murder spree, creating a vicious cycle of vengeance that leads nowhere.
+Follow a nameless, colourful protagonist as he shoots up government guards in revenge for his killed wife. Why was she killed, you may ask? The plot simply begged for motivation for our nameless killer.
+
+Made for **Ludum Dare 44**. **Theme:** Your life is currency
 
 ## Features
-* 7 primary waves of enemies
-* An endless-wave mode to test your might!
-* An upgrades shop that allows you to build onto your skills using points earned
+* 6 waves of army formations trying their best to gun you down
+* A final boss (conveniently the killer of nameless hero's wife)
+* An endless wave following the final boss for more shooter fun
+* An upgrade system to help you git gud 
 
 ## Controls
 * `W` `A` `S` `D` to move the character around the environment
