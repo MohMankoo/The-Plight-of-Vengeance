@@ -1,4 +1,4 @@
-# The-Plight-of-Vengeance
+# The Plight of Vengeance
 
 ![Game logo](/Assets/Sprites/Intro/TitleScreenCropped.png)
 
